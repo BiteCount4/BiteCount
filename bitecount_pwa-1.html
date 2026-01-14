@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BiteCount - Manajemen Kalori Anda</title>
+    <title>BiteCount - Manajemen Kalori & Komunitas Anda</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -19,12 +19,21 @@
             --secondary-pink: #F472B6;
             --light-pink: #FBCFE8;
             
+            --primary-blue: #3B82F6;
+            --secondary-blue: #60A5FA;
+            --light-blue: #BFDBFE;
+            
+            --primary-orange: #F59E0B;
+            --secondary-orange: #FBBF24;
+            
             --neutral-dark: #1F2937;
             --neutral-gray: #6B7280;
             --neutral-light: #F9FAFB;
             --neutral-border: #E5E7EB;
             
             --gradient-primary: linear-gradient(135deg, var(--primary-green) 0%, var(--primary-pink) 100%);
+            --gradient-blue: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+            --gradient-orange: linear-gradient(135deg, var(--primary-orange) 0%, var(--secondary-orange) 100%);
             --gradient-subtle: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(236, 72, 153, 0.1) 100%);
             
             --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12);
@@ -60,7 +69,7 @@
             background-image: 
                 radial-gradient(circle at 10% 20%, rgba(16, 185, 129, 0.05) 0%, transparent 20%),
                 radial-gradient(circle at 90% 30%, rgba(236, 72, 153, 0.05) 0%, transparent 20%),
-                radial-gradient(circle at 50% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 20%);
+                radial-gradient(circle at 50% 80%, rgba(59, 130, 246, 0.05) 0%, transparent 20%);
             z-index: -1;
         }
 
@@ -340,6 +349,14 @@
             background: var(--primary-pink);
         }
 
+        .glass-card.blue-accent::before {
+            background: var(--primary-blue);
+        }
+
+        .glass-card.orange-accent::before {
+            background: var(--primary-orange);
+        }
+
         /* ========== BUTTONS ========== */
         .btn-primary {
             background: var(--gradient-primary);
@@ -395,6 +412,40 @@
             color: var(--primary-green);
         }
 
+        .btn-blue {
+            background: var(--gradient-blue);
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-weight: 600;
+            padding: 14px 28px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+        }
+
+        .btn-blue:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
+        }
+
+        .btn-orange {
+            background: var(--gradient-orange);
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-weight: 600;
+            padding: 14px 28px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+        }
+
+        .btn-orange:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(245, 158, 11, 0.4);
+        }
+
         /* ========== FLOATING ACTION BUTTON ========== */
         .fab {
             position: fixed;
@@ -429,6 +480,16 @@
 
         .fab-secondary:hover {
             box-shadow: 0 8px 30px rgba(236, 72, 153, 0.5);
+        }
+
+        .fab-tertiary {
+            bottom: 170px;
+            background: var(--primary-blue);
+            box-shadow: 0 4px 20px rgba(59, 130, 246, 0.4);
+        }
+
+        .fab-tertiary:hover {
+            box-shadow: 0 8px 30px rgba(59, 130, 246, 0.5);
         }
 
         /* ========== PROGRESS RING ========== */
@@ -763,6 +824,55 @@
             align-items: center;
         }
 
+        /* ========== BOTTOM NAVIGATION ========== */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(229, 231, 235, 0.5);
+            padding: 12px 20px;
+            display: flex;
+            justify-content: space-around;
+            z-index: 999;
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: var(--neutral-gray);
+            transition: all 0.3s ease;
+            padding: 8px 16px;
+            border-radius: 12px;
+            min-width: 70px;
+        }
+
+        .nav-item.active {
+            color: var(--primary-green);
+            background: rgba(16, 185, 129, 0.1);
+            transform: translateY(-5px);
+        }
+
+        .nav-item i {
+            font-size: 1.5rem;
+            margin-bottom: 4px;
+        }
+
+        .nav-item span {
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .nav-item:hover {
+            color: var(--primary-green);
+            transform: translateY(-2px);
+        }
+
         /* ========== CHATBOT STYLES ========== */
         .chat-message {
             display: flex;
@@ -988,6 +1098,284 @@
             transform: translateY(-2px);
         }
 
+        /* ========== SOCIAL & COMMUNITY STYLES ========== */
+        .social-post {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(229, 231, 235, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        .social-post:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+            border-color: rgba(16, 185, 129, 0.2);
+        }
+
+        .post-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .post-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 12px;
+            border: 2px solid var(--primary-green);
+        }
+
+        .post-user-info h6 {
+            margin: 0;
+            font-weight: 600;
+        }
+
+        .post-user-info .time {
+            font-size: 0.8rem;
+            color: var(--neutral-gray);
+        }
+
+        .post-content {
+            margin-bottom: 16px;
+        }
+
+        .post-stats {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 12px;
+        }
+
+        .post-stat {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--neutral-gray);
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .post-stat:hover {
+            color: var(--primary-green);
+        }
+
+        .post-stat.active {
+            color: var(--primary-pink);
+        }
+
+        .post-actions {
+            display: flex;
+            gap: 10px;
+            padding-top: 12px;
+            border-top: 1px solid rgba(229, 231, 235, 0.5);
+        }
+
+        .action-btn {
+            flex: 1;
+            background: transparent;
+            border: 1px solid rgba(229, 231, 235, 0.8);
+            border-radius: 8px;
+            padding: 8px;
+            color: var(--neutral-gray);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            font-size: 0.9rem;
+        }
+
+        .action-btn:hover {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--primary-green);
+            border-color: var(--primary-green);
+        }
+
+        .action-btn.active {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--primary-green);
+            border-color: var(--primary-green);
+        }
+
+        .achievement-badge {
+            background: linear-gradient(135deg, var(--primary-orange), var(--secondary-orange));
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            margin: 5px;
+        }
+
+        .challenge-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(229, 231, 235, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        .challenge-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .challenge-progress {
+            height: 8px;
+            background: rgba(229, 231, 235, 0.5);
+            border-radius: 4px;
+            margin: 15px 0;
+            overflow: hidden;
+        }
+
+        .challenge-progress-bar {
+            height: 100%;
+            background: var(--gradient-primary);
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+
+        .friend-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .friend-item {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 12px;
+            border: 1px solid rgba(229, 231, 235, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        .friend-item:hover {
+            transform: translateX(5px);
+            border-color: var(--primary-green);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .friend-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 12px;
+            border: 2px solid var(--primary-green);
+        }
+
+        .friend-info {
+            flex: 1;
+        }
+
+        .friend-info h6 {
+            margin: 0;
+            font-weight: 600;
+        }
+
+        .friend-info .streak {
+            font-size: 0.8rem;
+            color: var(--primary-orange);
+            font-weight: 600;
+        }
+
+        .friend-status {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--secondary-green);
+        }
+
+        .friend-status.offline {
+            background: var(--neutral-gray);
+        }
+
+        .group-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(229, 231, 235, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        .group-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .group-members {
+            display: flex;
+            margin-top: 15px;
+        }
+
+        .group-member {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid white;
+            margin-left: -10px;
+        }
+
+        .group-member:first-child {
+            margin-left: 0;
+        }
+
+        .leaderboard-item {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 12px;
+            margin-bottom: 10px;
+            border: 1px solid rgba(229, 231, 235, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        .leaderboard-item:hover {
+            transform: translateX(5px);
+            border-color: var(--primary-green);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .leaderboard-rank {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--gradient-primary);
+            color: white;
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-right: 15px;
+        }
+
+        .leaderboard-rank.gold {
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+        }
+
+        .leaderboard-rank.silver {
+            background: linear-gradient(135deg, #C0C0C0, #808080);
+        }
+
+        .leaderboard-rank.bronze {
+            background: linear-gradient(135deg, #CD7F32, #8B4513);
+        }
+
         /* ========== RESPONSIVE DESIGN ========== */
         @media (max-width: 768px) {
             .glass-card {
@@ -1011,12 +1399,16 @@
             .fab {
                 width: 56px;
                 height: 56px;
-                bottom: 20px;
+                bottom: 80px;
                 right: 20px;
             }
             
             .fab-secondary {
-                bottom: 90px;
+                bottom: 150px;
+            }
+            
+            .fab-tertiary {
+                bottom: 220px;
             }
             
             .message-content {
@@ -1025,6 +1417,23 @@
             
             .modal-body {
                 padding: 20px;
+            }
+            
+            .bottom-nav {
+                padding: 10px 15px;
+            }
+            
+            .nav-item {
+                min-width: 60px;
+                padding: 6px 12px;
+            }
+            
+            .nav-item i {
+                font-size: 1.2rem;
+            }
+            
+            .nav-item span {
+                font-size: 0.7rem;
             }
         }
 
@@ -1050,11 +1459,35 @@
             .food-calories {
                 align-self: flex-end;
             }
+            
+            .post-actions {
+                flex-wrap: wrap;
+            }
+            
+            .action-btn {
+                min-width: calc(50% - 5px);
+            }
         }
 
         /* ========== UTILITY CLASSES ========== */
         .text-gradient {
             background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 700;
+        }
+
+        .text-gradient-blue {
+            background: var(--gradient-blue);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 700;
+        }
+
+        .text-gradient-orange {
+            background: var(--gradient-orange);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
@@ -1073,12 +1506,28 @@
             color: var(--primary-pink);
         }
 
+        .text-blue {
+            color: var(--primary-blue);
+        }
+
+        .text-orange {
+            color: var(--primary-orange);
+        }
+
         .bg-green {
             background-color: var(--primary-green);
         }
 
         .bg-pink {
             background-color: var(--primary-pink);
+        }
+
+        .bg-blue {
+            background-color: var(--primary-blue);
+        }
+
+        .bg-orange {
+            background-color: var(--primary-orange);
         }
 
         .shadow-lg {
@@ -1171,6 +1620,10 @@
             margin: 10px 0;
         }
 
+        .community-section {
+            margin-bottom: 30px;
+        }
+
         /* Mini leaf logo for headers */
         .mini-leaf {
             display: inline-block;
@@ -1253,7 +1706,7 @@
                 </div>
                 <h1 class="logo-text">BiteCount</h1>
                 <p class="lead">Kelola kalori Anda dengan mudah dan efektif</p>
-                <p class="logo-subtext">Health • Balance • Progress</p>
+                <p class="logo-subtext">Health • Balance • Progress • Community</p>
             </div>
 
             <div class="glass-card">
@@ -1433,6 +1886,30 @@
                 </div>
             </div>
 
+            <!-- Quick Community Stats -->
+            <div class="glass-card mb-4">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h5 class="mb-0">Komunitas Hari Ini</h5>
+                    <button class="btn-outline btn-sm" onclick="showCommunity()">
+                        <i class="fas fa-users me-1"></i> Lihat Semua
+                    </button>
+                </div>
+                <div class="row">
+                    <div class="col-4 text-center">
+                        <div class="macro-value text-blue" id="communityPosts">0</div>
+                        <div class="macro-label">Postingan</div>
+                    </div>
+                    <div class="col-4 text-center">
+                        <div class="macro-value text-pink" id="communityLikes">0</div>
+                        <div class="macro-label">Like</div>
+                    </div>
+                    <div class="col-4 text-center">
+                        <div class="macro-value text-orange" id="communityFriends">0</div>
+                        <div class="macro-label">Teman</div>
+                    </div>
+                </div>
+            </div>
+
             <!-- Search and Food Log -->
             <div class="glass-card mb-4">
                 <div class="search-container">
@@ -1468,6 +1945,144 @@
         <button class="fab fab-secondary" onclick="showChatbot()">
             <i class="fas fa-robot"></i>
         </button>
+
+        <button class="fab fab-tertiary" onclick="showCommunity()">
+            <i class="fas fa-users"></i>
+        </button>
+    </div>
+
+    <!-- Page: Community -->
+    <div class="page" id="communityPage">
+        <div class="sticky-header">
+            <div class="container">
+                <div class="header-content">
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="bitten-leaf-logo" style="width: 40px; height: 40px;">
+                            <div class="leaf-container">
+                                <div class="leaf-body"></div>
+                                <div class="leaf-veins">
+                                    <div class="leaf-vein main"></div>
+                                    <div class="leaf-vein secondary"></div>
+                                    <div class="leaf-vein secondary"></div>
+                                </div>
+                                <div class="bite-mark"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="mb-0">Komunitas BiteCount</h4>
+                            <small class="text-muted">Berbagi dan tumbuh bersama</small>
+                        </div>
+                    </div>
+                    <button class="btn-outline" onclick="showDashboard()">
+                        <i class="fas fa-arrow-left me-2"></i>Kembali
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="container py-4">
+            <!-- Create Post -->
+            <div class="glass-card mb-4">
+                <div class="post-header">
+                    <img id="userProfileImageCommunity" 
+                         src="https://ui-avatars.com/api/?name=User&background=10B981&color=fff&size=128" 
+                         class="post-avatar">
+                    <div class="post-user-info">
+                        <h6 id="communityUserName">User</h6>
+                        <div class="time">Bagikan pencapaian Anda...</div>
+                    </div>
+                </div>
+                <textarea class="form-control mb-3" id="newPostContent" rows="3" placeholder="Apa yang ingin Anda bagikan hari ini?"></textarea>
+                <div class="d-flex justify-content-between">
+                    <div class="d-flex gap-2">
+                        <button class="action-btn" onclick="addPostImage()">
+                            <i class="fas fa-image"></i> Foto
+                        </button>
+                        <button class="action-btn" onclick="addAchievement()">
+                            <i class="fas fa-trophy"></i> Pencapaian
+                        </button>
+                        <button class="action-btn" onclick="addFoodToPost()">
+                            <i class="fas fa-utensils"></i> Makanan
+                        </button>
+                    </div>
+                    <button class="btn-primary" onclick="createNewPost()">
+                        <i class="fas fa-paper-plane me-2"></i>Posting
+                    </button>
+                </div>
+            </div>
+
+            <!-- Community Tabs -->
+            <div class="mb-4">
+                <div class="d-flex overflow-auto pb-2">
+                    <button class="action-btn me-2 active" onclick="switchCommunityTab('feed')" id="tabFeed">
+                        <i class="fas fa-home me-1"></i> Feed
+                    </button>
+                    <button class="action-btn me-2" onclick="switchCommunityTab('challenges')" id="tabChallenges">
+                        <i class="fas fa-flag me-1"></i> Tantangan
+                    </button>
+                    <button class="action-btn me-2" onclick="switchCommunityTab('leaderboard')" id="tabLeaderboard">
+                        <i class="fas fa-trophy me-1"></i> Peringkat
+                    </button>
+                    <button class="action-btn me-2" onclick="switchCommunityTab('groups')" id="tabGroups">
+                        <i class="fas fa-users me-1"></i> Grup
+                    </button>
+                    <button class="action-btn" onclick="switchCommunityTab('friends')" id="tabFriends">
+                        <i class="fas fa-user-friends me-1"></i> Teman
+                    </button>
+                </div>
+            </div>
+
+            <!-- Feed Content -->
+            <div id="communityFeed" class="community-section">
+                <div class="text-center">
+                    <div class="spinner-border text-green" role="status">
+                        <span class="visually-hidden">Memuat...</span>
+                    </div>
+                    <p class="mt-2">Memuat postingan komunitas...</p>
+                </div>
+            </div>
+
+            <!-- Challenges Content -->
+            <div id="communityChallenges" class="community-section" style="display: none;">
+                <h5 class="mb-3">Tantangan Aktif</h5>
+                <div id="challengesList">
+                    <!-- Challenges will be loaded here -->
+                </div>
+                <button class="btn-primary w-100 mt-3" onclick="showChallengeModal()">
+                    <i class="fas fa-plus me-2"></i>Buat Tantangan Baru
+                </button>
+            </div>
+
+            <!-- Leaderboard Content -->
+            <div id="communityLeaderboard" class="community-section" style="display: none;">
+                <h5 class="mb-3">Peringkat Mingguan</h5>
+                <div id="leaderboardList">
+                    <!-- Leaderboard will be loaded here -->
+                </div>
+            </div>
+
+            <!-- Groups Content -->
+            <div id="communityGroups" class="community-section" style="display: none;">
+                <h5 class="mb-3">Grup Populer</h5>
+                <div id="groupsList">
+                    <!-- Groups will be loaded here -->
+                </div>
+                <button class="btn-blue w-100 mt-3" onclick="showGroupModal()">
+                    <i class="fas fa-plus me-2"></i>Buat Grup Baru
+                </button>
+            </div>
+
+            <!-- Friends Content -->
+            <div id="communityFriends" class="community-section" style="display: none;">
+                <h5 class="mb-3">Teman & Koneksi</h5>
+                <div class="friend-list" id="friendsList">
+                    <!-- Friends will be loaded here -->
+                </div>
+                <button class="btn-outline w-100 mt-3" onclick="showAddFriendModal()">
+                    <i class="fas fa-user-plus me-2"></i>Tambah Teman
+                </button>
+            </div>
+        </div>
     </div>
 
     <!-- Page: Chatbot -->
@@ -1619,6 +2234,12 @@
                             <label class="form-check-label" for="darkModeSwitch">Mode gelap</label>
                         </div>
                     </div>
+                    <div class="form-group">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" id="communitySwitch" checked>
+                            <label class="form-check-label" for="communitySwitch">Aktifkan fitur komunitas</label>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="mt-5 pt-4 border-top">
@@ -1633,6 +2254,26 @@
                 </div>
             </div>
         </div>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <div class="bottom-nav">
+        <a href="#" class="nav-item active" onclick="showDashboard(); return false;">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </a>
+        <a href="#" class="nav-item" onclick="showCommunity(); return false;">
+            <i class="fas fa-users"></i>
+            <span>Komunitas</span>
+        </a>
+        <a href="#" class="nav-item" onclick="showChatbot(); return false;">
+            <i class="fas fa-robot"></i>
+            <span>AI Assistant</span>
+        </a>
+        <a href="#" class="nav-item" onclick="showSettings(); return false;">
+            <i class="fas fa-cog"></i>
+            <span>Pengaturan</span>
+        </a>
     </div>
 
     <!-- Modal: Add Food -->
@@ -1887,6 +2528,132 @@
         </div>
     </div>
 
+    <!-- Modal: Create Challenge -->
+    <div class="modal fade" id="challengeModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><i class="fas fa-flag me-2"></i>Buat Tantangan Baru</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="form-label">Judul Tantangan</label>
+                        <input type="text" class="form-control" id="challengeTitle" placeholder="Contoh: 30 Days Water Challenge">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Deskripsi</label>
+                        <textarea class="form-control" id="challengeDescription" rows="3" placeholder="Jelaskan tantangan ini..."></textarea>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-label">Durasi (hari)</label>
+                                <input type="number" class="form-control" id="challengeDuration" min="1" max="365" value="30">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-label">Target</label>
+                                <input type="text" class="form-control" id="challengeTarget" placeholder="Contoh: 8 gelas/hari">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Tipe Tantangan</label>
+                        <select class="form-control" id="challengeType">
+                            <option value="hydration">Hidrasi</option>
+                            <option value="exercise">Olahraga</option>
+                            <option value="nutrition">Nutrisi</option>
+                            <option value="weight">Berat Badan</option>
+                            <option value="step">Langkah</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Privasi</label>
+                        <select class="form-control" id="challengePrivacy">
+                            <option value="public">Publik (Semua bisa ikut)</option>
+                            <option value="private">Privat (Hanya dengan undangan)</option>
+                            <option value="friends">Teman saja</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-outline" data-bs-dismiss="modal">Batal</button>
+                    <button type="button" class="btn-orange" onclick="createChallenge()">
+                        <i class="fas fa-plus me-2"></i>Buat Tantangan
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Create Group -->
+    <div class="modal fade" id="groupModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><i class="fas fa-users me-2"></i>Buat Grup Baru</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="form-label">Nama Grup</label>
+                        <input type="text" class="form-control" id="groupName" placeholder="Contoh: Fitness Indonesia">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Deskripsi Grup</label>
+                        <textarea class="form-control" id="groupDescription" rows="3" placeholder="Jelaskan tujuan grup ini..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Tipe Grup</label>
+                        <select class="form-control" id="groupType">
+                            <option value="fitness">Fitness & Olahraga</option>
+                            <option value="weight-loss">Penurunan Berat Badan</option>
+                            <option value="muscle-gain">Peningkatan Massa Otot</option>
+                            <option value="vegan">Vegan & Vegetarian</option>
+                            <option value="general">Umum</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Privasi Grup</label>
+                        <select class="form-control" id="groupPrivacy">
+                            <option value="public">Publik (Semua bisa bergabung)</option>
+                            <option value="private">Privat (Perlu persetujuan admin)</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-outline" data-bs-dismiss="modal">Batal</button>
+                    <button type="button" class="btn-blue" onclick="createGroup()">
+                        <i class="fas fa-plus me-2"></i>Buat Grup
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Add Friend -->
+    <div class="modal fade" id="addFriendModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><i class="fas fa-user-plus me-2"></i>Tambah Teman</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="search-container mb-4">
+                        <i class="fas fa-search search-icon"></i>
+                        <input type="text" class="search-bar" id="searchUsers" placeholder="Cari pengguna BiteCount...">
+                    </div>
+                    <div id="searchUsersResults">
+                        <p class="text-center text-muted">Mulai ketik untuk mencari pengguna</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
     <script>
         // Data Storage
@@ -1895,6 +2662,14 @@
         let dailyTarget = 0;
         let chatHistory = [];
         let currentChatType = 'dashboard';
+        
+        // Social & Community Data
+        let communityPosts = [];
+        let communityChallenges = [];
+        let communityGroups = [];
+        let communityFriends = [];
+        let communityLeaderboard = [];
+        let userAchievements = [];
 
         // Food Database (Makanan Lokal Indonesia - Updated)
         const foodDatabase = [
@@ -1920,6 +2695,80 @@
             { name: "Oatmeal", calories: 158, protein: 6, carbs: 27, fat: 3, portion: "40g" }
         ];
 
+        // Mock Community Data
+        const mockUsers = [
+            { id: 1, name: "Andi Pratama", avatar: "https://ui-avatars.com/api/?name=Andi+Pratama&background=3B82F6&color=fff&size=128", streak: 7 },
+            { id: 2, name: "Sari Dewi", avatar: "https://ui-avatars.com/api/?name=Sari+Dewi&background=EC4899&color=fff&size=128", streak: 14 },
+            { id: 3, name: "Budi Santoso", avatar: "https://ui-avatars.com/api/?name=Budi+Santoso&background=10B981&color=fff&size=128", streak: 21 },
+            { id: 4, name: "Maya Indah", avatar: "https://ui-avatars.com/api/?name=Maya+Indah&background=F59E0B&color=fff&size=128", streak: 3 },
+            { id: 5, name: "Rizki Ramadhan", avatar: "https://ui-avatars.com/api/?name=Rizki+Ramadhan&background=8B5CF6&color=fff&size=128", streak: 30 }
+        ];
+
+        // Mock Challenges
+        const mockChallenges = [
+            { 
+                id: 1, 
+                title: "30 Days Water Challenge", 
+                description: "Minum 2 liter air setiap hari selama 30 hari", 
+                type: "hydration",
+                duration: 30,
+                target: "2 liter/hari",
+                participants: 142,
+                progress: 65,
+                creator: mockUsers[0]
+            },
+            { 
+                id: 2, 
+                title: "10k Steps Daily", 
+                description: "Capai 10.000 langkah setiap hari", 
+                type: "step",
+                duration: 7,
+                target: "10.000 langkah/hari",
+                participants: 89,
+                progress: 42,
+                creator: mockUsers[1]
+            },
+            { 
+                id: 3, 
+                title: "Vegetarian Week", 
+                description: "Makan vegetarian selama 7 hari", 
+                type: "nutrition",
+                duration: 7,
+                target: "0 daging",
+                participants: 56,
+                progress: 85,
+                creator: mockUsers[2]
+            }
+        ];
+
+        // Mock Groups
+        const mockGroups = [
+            { 
+                id: 1, 
+                name: "Fitness Indonesia", 
+                description: "Komunitas fitness dan olahraga Indonesia", 
+                type: "fitness",
+                members: 245,
+                image: "https://images.unsplash.com/photo-1536922246289-88c42f957773?w=400&h=200&fit=crop"
+            },
+            { 
+                id: 2, 
+                name: "Weight Loss Journey", 
+                description: "Berbagi perjalanan penurunan berat badan", 
+                type: "weight-loss",
+                members: 189,
+                image: "https://images.unsplash.com/photo-1518611012118-696072aa579a?w=400&h=200&fit=crop"
+            },
+            { 
+                id: 3, 
+                name: "Vegan Indonesia", 
+                description: "Komunitas vegan dan vegetarian Indonesia", 
+                type: "vegan",
+                members: 134,
+                image: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400&h=200&fit=crop"
+            }
+        ];
+
         // Initialize Application
         window.onload = function() {
             setTimeout(() => {
@@ -1933,6 +2782,7 @@
             
             setupProfileImageUpload();
             setupEventListeners();
+            initializeCommunityData();
             
             // Show welcome tip if new user
             if (!localStorage.getItem('biteCountFirstVisit')) {
@@ -1951,6 +2801,9 @@
             // Search food input
             document.getElementById('searchFood').addEventListener('input', handleFoodSearch);
             
+            // Search users input
+            document.getElementById('searchUsers')?.addEventListener('input', handleUserSearch);
+            
             // Chat input enter key
             const chatInput = document.getElementById('chatInput');
             const welcomeChatInput = document.getElementById('welcomeChatInput');
@@ -1966,6 +2819,95 @@
                     if (e.key === 'Enter') sendWelcomeMessage();
                 });
             }
+            
+            // New post enter key
+            const newPostContent = document.getElementById('newPostContent');
+            if (newPostContent) {
+                newPostContent.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter' && e.ctrlKey) {
+                        createNewPost();
+                    }
+                });
+            }
+        }
+
+        // Initialize Community Data
+        function initializeCommunityData() {
+            // Load saved community data
+            const savedCommunityData = localStorage.getItem('biteCountCommunity');
+            if (savedCommunityData) {
+                const data = JSON.parse(savedCommunityData);
+                communityPosts = data.posts || [];
+                communityChallenges = data.challenges || mockChallenges;
+                communityGroups = data.groups || mockGroups;
+                communityFriends = data.friends || [];
+                communityLeaderboard = data.leaderboard || [];
+                userAchievements = data.achievements || [];
+            } else {
+                // Initialize with mock data
+                communityChallenges = mockChallenges;
+                communityGroups = mockGroups;
+                communityFriends = mockUsers.slice(0, 3);
+                generateMockPosts();
+                generateLeaderboard();
+                saveCommunityData();
+            }
+        }
+
+        // Generate mock posts
+        function generateMockPosts() {
+            const postTypes = ['achievement', 'food', 'progress', 'tip', 'question'];
+            const messages = [
+                "Hari ini berhasil mencapai target kalori! 🎉",
+                "Baru mencoba resep salad sehat, enak banget! 🥗",
+                "Turun 2kg dalam sebulan! Semangat terus! 💪",
+                "Tips: Minum air sebelum makan membantu kontrol porsi 💧",
+                "Ada yang punya rekomendasi makanan tinggi protein? 🤔",
+                "Berhasil consistency streak 30 hari! 🏆",
+                "Sarapan sehat pagi ini: oatmeal dengan buah 🍓",
+                "Workout hari ini selesai! Feeling great! 🏋️‍♂️",
+                "Berbagi progress foto, ada perubahan nggak? 📸",
+                "Baru join challenge 10k steps, wish me luck! 👟"
+            ];
+
+            communityPosts = mockUsers.map((user, index) => ({
+                id: index + 1,
+                userId: user.id,
+                userName: user.name,
+                userAvatar: user.avatar,
+                content: messages[index % messages.length],
+                type: postTypes[index % postTypes.length],
+                likes: Math.floor(Math.random() * 50) + 10,
+                comments: Math.floor(Math.random() * 20) + 1,
+                shares: Math.floor(Math.random() * 10),
+                timestamp: new Date(Date.now() - (index * 3600000)).toISOString(),
+                userLiked: index % 3 === 0,
+                userCommented: index % 4 === 0
+            }));
+        }
+
+        // Generate leaderboard
+        function generateLeaderboard() {
+            communityLeaderboard = mockUsers.map((user, index) => ({
+                ...user,
+                points: (index + 1) * 250,
+                streak: user.streak || Math.floor(Math.random() * 30) + 1,
+                rank: index + 1
+            }));
+        }
+
+        // Save community data
+        function saveCommunityData() {
+            const data = {
+                posts: communityPosts,
+                challenges: communityChallenges,
+                groups: communityGroups,
+                friends: communityFriends,
+                leaderboard: communityLeaderboard,
+                achievements: userAchievements,
+                lastUpdated: new Date().toISOString()
+            };
+            localStorage.setItem('biteCountCommunity', JSON.stringify(data));
         }
 
         // Profile Setup
@@ -2152,6 +3094,7 @@
 
             // Update profile section
             document.getElementById('displayName').textContent = userData.name || 'User';
+            document.getElementById('communityUserName').textContent = userData.name || 'User';
             document.getElementById('userGoalBadge').innerHTML = `
                 <i class="fas fa-bullseye me-1"></i>${userData.goalText || 'Turunkan Berat Badan'}
             `;
@@ -2159,13 +3102,16 @@
             
             // Update profile image
             const profileImage = document.getElementById('userProfileImage');
+            const communityProfileImage = document.getElementById('userProfileImageCommunity');
             const settingsProfileImage = document.getElementById('settingsProfileImage');
             if (userData.profileImage) {
                 profileImage.src = userData.profileImage;
+                communityProfileImage.src = userData.profileImage;
                 settingsProfileImage.src = userData.profileImage;
             } else {
                 const name = userData.name || 'User';
                 profileImage.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=10B981&color=fff&size=128`;
+                communityProfileImage.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=10B981&color=fff&size=128`;
                 settingsProfileImage.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=10B981&color=fff&size=128`;
             }
 
@@ -2191,6 +3137,9 @@
                 #f0f0f0 ${percentage}%,
                 #f0f0f0 100%
             )`;
+
+            // Update community stats
+            updateCommunityStats();
 
             // Update food history
             const historyDiv = document.getElementById('foodHistory');
@@ -2255,6 +3204,17 @@
             }
         }
 
+        // Update Community Stats
+        function updateCommunityStats() {
+            const totalPosts = communityPosts.length;
+            const totalLikes = communityPosts.reduce((sum, post) => sum + post.likes, 0);
+            const totalFriends = communityFriends.length;
+
+            document.getElementById('communityPosts').textContent = totalPosts;
+            document.getElementById('communityLikes').textContent = totalLikes;
+            document.getElementById('communityFriends').textContent = totalFriends;
+        }
+
         function removeFood(index) {
             const foodName = foodLog[index].name;
             foodLog.splice(index, 1);
@@ -2270,6 +3230,18 @@
                 document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
                 document.getElementById('dashboardPage').classList.add('active');
                 updateDashboard();
+                updateNavigation('home');
+                hideLoading();
+            }, 800);
+        }
+
+        function showCommunity() {
+            showLoading();
+            setTimeout(() => {
+                document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+                document.getElementById('communityPage').classList.add('active');
+                loadCommunityContent();
+                updateNavigation('community');
                 hideLoading();
             }, 800);
         }
@@ -2280,8 +3252,32 @@
                 document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
                 document.getElementById('settingsPage').classList.add('active');
                 updateDashboard();
+                updateNavigation('settings');
                 hideLoading();
             }, 800);
+        }
+
+        // Update Bottom Navigation
+        function updateNavigation(activePage) {
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            const navItems = document.querySelectorAll('.nav-item');
+            switch(activePage) {
+                case 'home':
+                    navItems[0].classList.add('active');
+                    break;
+                case 'community':
+                    navItems[1].classList.add('active');
+                    break;
+                case 'chatbot':
+                    navItems[2].classList.add('active');
+                    break;
+                case 'settings':
+                    navItems[3].classList.add('active');
+                    break;
+            }
         }
 
         // Loading
@@ -2336,6 +3332,7 @@
         function resetApp() {
             if (confirm('⚠️ Apakah Anda yakin ingin mereset semua data? Tindakan ini tidak dapat dibatalkan.')) {
                 localStorage.removeItem('biteCountData');
+                localStorage.removeItem('biteCountCommunity');
                 localStorage.removeItem('biteCountFirstVisit');
                 location.reload();
             }
@@ -2431,6 +3428,520 @@
             document.getElementById('profileImageInput').click();
         }
 
+        // Community Functions
+        function loadCommunityContent() {
+            loadCommunityFeed();
+            updateCommunityStats();
+        }
+
+        function loadCommunityFeed() {
+            const feedContainer = document.getElementById('communityFeed');
+            
+            if (communityPosts.length === 0) {
+                feedContainer.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-users"></i>
+                        <h5 class="mt-3">Belum ada postingan</h5>
+                        <p class="mb-3">Jadilah yang pertama membagikan pencapaian Anda!</p>
+                        <button class="btn-primary" onclick="createNewPost()">
+                            <i class="fas fa-plus me-2"></i>Buat Postingan Pertama
+                        </button>
+                    </div>
+                `;
+                return;
+            }
+            
+            // Sort posts by timestamp (newest first)
+            const sortedPosts = [...communityPosts].sort((a, b) => 
+                new Date(b.timestamp) - new Date(a.timestamp)
+            );
+            
+            feedContainer.innerHTML = sortedPosts.map(post => `
+                <div class="social-post" id="post-${post.id}">
+                    <div class="post-header">
+                        <img src="${post.userAvatar}" class="post-avatar" alt="${post.userName}">
+                        <div class="post-user-info">
+                            <h6 class="mb-0">${post.userName}</h6>
+                            <div class="time">${formatTimeAgo(post.timestamp)}</div>
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        <p class="mb-2">${post.content}</p>
+                        ${post.type === 'achievement' ? '<span class="achievement-badge"><i class="fas fa-trophy me-1"></i>Pencapaian</span>' : ''}
+                        ${post.type === 'food' ? '<span class="badge bg-green"><i class="fas fa-utensils me-1"></i>Makanan</span>' : ''}
+                    </div>
+                    <div class="post-stats">
+                        <div class="post-stat ${post.userLiked ? 'active' : ''}" onclick="toggleLike(${post.id})">
+                            <i class="fas fa-heart ${post.userLiked ? 'text-pink' : ''}"></i>
+                            <span>${post.likes}</span>
+                        </div>
+                        <div class="post-stat" onclick="showComments(${post.id})">
+                            <i class="fas fa-comment"></i>
+                            <span>${post.comments}</span>
+                        </div>
+                        <div class="post-stat" onclick="sharePost(${post.id})">
+                            <i class="fas fa-share"></i>
+                            <span>${post.shares}</span>
+                        </div>
+                    </div>
+                    <div class="post-actions">
+                        <button class="action-btn ${post.userLiked ? 'active' : ''}" onclick="toggleLike(${post.id})">
+                            <i class="fas fa-heart"></i> Like
+                        </button>
+                        <button class="action-btn" onclick="showComments(${post.id})">
+                            <i class="fas fa-comment"></i> Komentar
+                        </button>
+                        <button class="action-btn" onclick="sharePost(${post.id})">
+                            <i class="fas fa-share"></i> Bagikan
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function formatTimeAgo(timestamp) {
+            const now = new Date();
+            const postTime = new Date(timestamp);
+            const diffMs = now - postTime;
+            const diffMins = Math.floor(diffMs / 60000);
+            const diffHours = Math.floor(diffMs / 3600000);
+            const diffDays = Math.floor(diffMs / 86400000);
+
+            if (diffMins < 1) return 'Baru saja';
+            if (diffMins < 60) return `${diffMins} menit yang lalu`;
+            if (diffHours < 24) return `${diffHours} jam yang lalu`;
+            if (diffDays < 7) return `${diffDays} hari yang lalu`;
+            return postTime.toLocaleDateString('id-ID');
+        }
+
+        function switchCommunityTab(tabName) {
+            // Update active tab buttons
+            document.querySelectorAll('.action-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(`tab${tabName.charAt(0).toUpperCase() + tabName.slice(1)}`).classList.add('active');
+            
+            // Hide all sections
+            document.querySelectorAll('.community-section').forEach(section => {
+                section.style.display = 'none';
+            });
+            
+            // Show selected section
+            document.getElementById(`community${tabName.charAt(0).toUpperCase() + tabName.slice(1)}`).style.display = 'block';
+            
+            // Load content for the tab
+            switch(tabName) {
+                case 'feed':
+                    loadCommunityFeed();
+                    break;
+                case 'challenges':
+                    loadChallenges();
+                    break;
+                case 'leaderboard':
+                    loadLeaderboard();
+                    break;
+                case 'groups':
+                    loadGroups();
+                    break;
+                case 'friends':
+                    loadFriends();
+                    break;
+            }
+        }
+
+        function loadChallenges() {
+            const challengesContainer = document.getElementById('challengesList');
+            
+            challengesContainer.innerHTML = communityChallenges.map(challenge => `
+                <div class="challenge-card">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <div>
+                            <h6 class="mb-1">${challenge.title}</h6>
+                            <p class="text-muted small mb-0">${challenge.description}</p>
+                        </div>
+                        <span class="badge bg-orange">${challenge.type}</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <div class="small">
+                            <i class="fas fa-users me-1"></i> ${challenge.participants} peserta
+                        </div>
+                        <div class="small">
+                            <i class="fas fa-calendar me-1"></i> ${challenge.duration} hari
+                        </div>
+                    </div>
+                    <div class="challenge-progress">
+                        <div class="challenge-progress-bar" style="width: ${challenge.progress}%"></div>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center mt-3">
+                        <div class="small">
+                            <i class="fas fa-target me-1"></i> Target: ${challenge.target}
+                        </div>
+                        <button class="btn-outline btn-sm" onclick="joinChallenge(${challenge.id})">
+                            <i class="fas fa-plus me-1"></i> Ikuti
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function loadLeaderboard() {
+            const leaderboardContainer = document.getElementById('leaderboardList');
+            
+            leaderboardContainer.innerHTML = communityLeaderboard.map(user => `
+                <div class="leaderboard-item">
+                    <div class="leaderboard-rank ${user.rank === 1 ? 'gold' : user.rank === 2 ? 'silver' : user.rank === 3 ? 'bronze' : ''}">
+                        ${user.rank}
+                    </div>
+                    <img src="${user.avatar}" class="post-avatar me-3">
+                    <div class="flex-grow-1">
+                        <h6 class="mb-0">${user.name}</h6>
+                        <div class="small">
+                            <span class="text-orange me-3"><i class="fas fa-fire me-1"></i> ${user.streak} hari</span>
+                            <span class="text-green">${user.points} poin</span>
+                        </div>
+                    </div>
+                    <button class="btn-outline btn-sm" onclick="addFriend(${user.id})">
+                        <i class="fas fa-user-plus"></i>
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        function loadGroups() {
+            const groupsContainer = document.getElementById('groupsList');
+            
+            groupsContainer.innerHTML = communityGroups.map(group => `
+                <div class="group-card">
+                    <div class="d-flex">
+                        <div class="flex-shrink-0">
+                            <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #${Math.floor(Math.random()*16777215).toString(16)}, #${Math.floor(Math.random()*16777215).toString(16)}); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px;">
+                                <i class="fas fa-users"></i>
+                            </div>
+                        </div>
+                        <div class="flex-grow-1 ms-3">
+                            <h6 class="mb-1">${group.name}</h6>
+                            <p class="text-muted small mb-2">${group.description}</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="group-members">
+                                    <img src="https://ui-avatars.com/api/?name=User1&background=3B82F6&color=fff&size=128" class="group-member">
+                                    <img src="https://ui-avatars.com/api/?name=User2&background=EC4899&color=fff&size=128" class="group-member">
+                                    <img src="https://ui-avatars.com/api/?name=User3&background=10B981&color=fff&size=128" class="group-member">
+                                    <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--neutral-border); display: flex; align-items: center; justify-content: center; border: 2px solid white; margin-left: -10px;">
+                                        <span class="small">+${group.members - 3}</span>
+                                    </div>
+                                </div>
+                                <button class="btn-outline btn-sm" onclick="joinGroup(${group.id})">
+                                    <i class="fas fa-plus me-1"></i> Gabung
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function loadFriends() {
+            const friendsContainer = document.getElementById('friendsList');
+            
+            if (communityFriends.length === 0) {
+                friendsContainer.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-user-friends"></i>
+                        <h5 class="mt-3">Belum ada teman</h5>
+                        <p class="mb-3">Mulai tambahkan teman untuk berbagi progres!</p>
+                        <button class="btn-primary" onclick="showAddFriendModal()">
+                            <i class="fas fa-user-plus me-2"></i>Tambah Teman
+                        </button>
+                    </div>
+                `;
+                return;
+            }
+            
+            friendsContainer.innerHTML = communityFriends.map(friend => `
+                <div class="friend-item">
+                    <img src="${friend.avatar}" class="friend-avatar">
+                    <div class="friend-info">
+                        <h6 class="mb-0">${friend.name}</h6>
+                        <div class="streak"><i class="fas fa-fire me-1"></i> ${friend.streak || 0} hari streak</div>
+                    </div>
+                    <div class="friend-status ${friend.online ? '' : 'offline'}"></div>
+                </div>
+            `).join('');
+        }
+
+        function createNewPost() {
+            const content = document.getElementById('newPostContent').value.trim();
+            
+            if (!content) {
+                showToast('⚠️ Konten Kosong', 'Silakan tulis sesuatu untuk diposting');
+                return;
+            }
+            
+            const newPost = {
+                id: communityPosts.length + 1,
+                userId: 0, // Current user
+                userName: userData.name || 'User',
+                userAvatar: userData.profileImage || `https://ui-avatars.com/api/?name=${encodeURIComponent(userData.name || 'User')}&background=10B981&color=fff&size=128`,
+                content: content,
+                type: 'general',
+                likes: 0,
+                comments: 0,
+                shares: 0,
+                timestamp: new Date().toISOString(),
+                userLiked: false,
+                userCommented: false
+            };
+            
+            communityPosts.unshift(newPost);
+            saveCommunityData();
+            loadCommunityFeed();
+            document.getElementById('newPostContent').value = '';
+            showToast('✅ Postingan Dibuat', 'Postingan Anda telah dibagikan ke komunitas!');
+        }
+
+        function toggleLike(postId) {
+            const post = communityPosts.find(p => p.id === postId);
+            if (post) {
+                if (post.userLiked) {
+                    post.likes--;
+                } else {
+                    post.likes++;
+                }
+                post.userLiked = !post.userLiked;
+                saveCommunityData();
+                
+                // Update UI
+                const postElement = document.getElementById(`post-${postId}`);
+                if (postElement) {
+                    const likeStat = postElement.querySelector('.post-stat');
+                    const likeCount = likeStat.querySelector('span');
+                    const likeIcon = likeStat.querySelector('i');
+                    const likeBtn = postElement.querySelector('.action-btn');
+                    
+                    likeCount.textContent = post.likes;
+                    likeStat.classList.toggle('active');
+                    likeIcon.classList.toggle('text-pink');
+                    likeBtn.classList.toggle('active');
+                }
+            }
+        }
+
+        function showComments(postId) {
+            // For now, just show a toast
+            showToast('💬 Komentar', 'Fitur komentar akan segera hadir!');
+        }
+
+        function sharePost(postId) {
+            const post = communityPosts.find(p => p.id === postId);
+            if (post) {
+                post.shares++;
+                saveCommunityData();
+                
+                // Update UI
+                const postElement = document.getElementById(`post-${postId}`);
+                if (postElement) {
+                    const shareStat = postElement.querySelectorAll('.post-stat')[2];
+                    const shareCount = shareStat.querySelector('span');
+                    shareCount.textContent = post.shares;
+                }
+                
+                showToast('📤 Dibagikan', 'Postingan telah dibagikan!');
+            }
+        }
+
+        function addPostImage() {
+            showToast('🖼️ Tambah Gambar', 'Fitur upload gambar akan segera hadir!');
+        }
+
+        function addAchievement() {
+            const achievements = [
+                "🏆 Streak 7 Hari",
+                "🎯 Capai Target Kalori",
+                "💪 Workout 5x Seminggu",
+                "🥦 Makan Sayur Tiap Hari",
+                "💧 Minum 2L Air/Hari",
+                "⚖️ Turun 1kg",
+                "🧘 Meditasi Rutin",
+                "🏃‍♂️ Lari 5km"
+            ];
+            
+            const randomAchievement = achievements[Math.floor(Math.random() * achievements.length)];
+            document.getElementById('newPostContent').value += `\n${randomAchievement}`;
+        }
+
+        function addFoodToPost() {
+            if (foodLog.length > 0) {
+                const latestFood = foodLog[foodLog.length - 1];
+                document.getElementById('newPostContent').value += `\n🍽️ ${latestFood.name} - ${latestFood.calories} kkal`;
+            } else {
+                showToast('🍽️ Tambah Makanan', 'Tambahkan makanan ke log terlebih dahulu!');
+            }
+        }
+
+        function showChallengeModal() {
+            new bootstrap.Modal(document.getElementById('challengeModal')).show();
+        }
+
+        function createChallenge() {
+            const title = document.getElementById('challengeTitle').value.trim();
+            const description = document.getElementById('challengeDescription').value.trim();
+            const duration = parseInt(document.getElementById('challengeDuration').value);
+            const target = document.getElementById('challengeTarget').value.trim();
+            const type = document.getElementById('challengeType').value;
+            const privacy = document.getElementById('challengePrivacy').value;
+            
+            if (!title || !description || !target) {
+                showToast('⚠️ Data Tidak Lengkap', 'Harap isi semua field yang diperlukan');
+                return;
+            }
+            
+            const newChallenge = {
+                id: communityChallenges.length + 1,
+                title: title,
+                description: description,
+                type: type,
+                duration: duration,
+                target: target,
+                participants: 1,
+                progress: 0,
+                creator: {
+                    name: userData.name || 'User',
+                    avatar: userData.profileImage || `https://ui-avatars.com/api/?name=${encodeURIComponent(userData.name || 'User')}&background=10B981&color=fff&size=128`
+                },
+                privacy: privacy,
+                createdAt: new Date().toISOString()
+            };
+            
+            communityChallenges.push(newChallenge);
+            saveCommunityData();
+            bootstrap.Modal.getInstance(document.getElementById('challengeModal')).hide();
+            
+            // Reset form
+            ['challengeTitle', 'challengeDescription', 'challengeTarget'].forEach(id => {
+                document.getElementById(id).value = '';
+            });
+            
+            showToast('🎯 Tantangan Dibuat', 'Tantangan baru telah dibuat!');
+            loadChallenges();
+        }
+
+        function joinChallenge(challengeId) {
+            const challenge = communityChallenges.find(c => c.id === challengeId);
+            if (challenge) {
+                challenge.participants++;
+                saveCommunityData();
+                loadChallenges();
+                showToast('✅ Bergabung', `Anda telah bergabung dengan tantangan "${challenge.title}"`);
+            }
+        }
+
+        function showGroupModal() {
+            new bootstrap.Modal(document.getElementById('groupModal')).show();
+        }
+
+        function createGroup() {
+            const name = document.getElementById('groupName').value.trim();
+            const description = document.getElementById('groupDescription').value.trim();
+            const type = document.getElementById('groupType').value;
+            const privacy = document.getElementById('groupPrivacy').value;
+            
+            if (!name || !description) {
+                showToast('⚠️ Data Tidak Lengkap', 'Harap isi nama dan deskripsi grup');
+                return;
+            }
+            
+            const newGroup = {
+                id: communityGroups.length + 1,
+                name: name,
+                description: description,
+                type: type,
+                members: 1,
+                privacy: privacy,
+                createdAt: new Date().toISOString()
+            };
+            
+            communityGroups.push(newGroup);
+            saveCommunityData();
+            bootstrap.Modal.getInstance(document.getElementById('groupModal')).hide();
+            
+            // Reset form
+            ['groupName', 'groupDescription'].forEach(id => {
+                document.getElementById(id).value = '';
+            });
+            
+            showToast('👥 Grup Dibuat', 'Grup baru telah dibuat!');
+            loadGroups();
+        }
+
+        function joinGroup(groupId) {
+            const group = communityGroups.find(g => g.id === groupId);
+            if (group) {
+                group.members++;
+                saveCommunityData();
+                loadGroups();
+                showToast('✅ Bergabung', `Anda telah bergabung dengan grup "${group.name}"`);
+            }
+        }
+
+        function showAddFriendModal() {
+            new bootstrap.Modal(document.getElementById('addFriendModal')).show();
+        }
+
+        function handleUserSearch(e) {
+            const query = e.target.value.toLowerCase();
+            const results = document.getElementById('searchUsersResults');
+            
+            if (query.length < 2) {
+                results.innerHTML = '<p class="text-center text-muted">Mulai ketik untuk mencari pengguna</p>';
+                return;
+            }
+            
+            // Filter mock users (excluding current user and existing friends)
+            const filteredUsers = mockUsers.filter(user => 
+                user.name.toLowerCase().includes(query) && 
+                !communityFriends.some(friend => friend.id === user.id) &&
+                user.name.toLowerCase() !== userData.name?.toLowerCase()
+            );
+            
+            if (filteredUsers.length > 0) {
+                results.innerHTML = filteredUsers.map(user => `
+                    <div class="friend-item">
+                        <img src="${user.avatar}" class="friend-avatar">
+                        <div class="friend-info">
+                            <h6 class="mb-0">${user.name}</h6>
+                            <div class="streak"><i class="fas fa-fire me-1"></i> ${user.streak} hari streak</div>
+                        </div>
+                        <button class="btn-primary btn-sm" onclick="addFriend(${user.id})">
+                            <i class="fas fa-user-plus me-1"></i> Tambah
+                        </button>
+                    </div>
+                `).join('');
+            } else {
+                results.innerHTML = `
+                    <div class="empty-state py-4">
+                        <i class="fas fa-search"></i>
+                        <p class="mt-3">Tidak ditemukan pengguna "${query}"</p>
+                    </div>
+                `;
+            }
+        }
+
+        function addFriend(userId) {
+            const user = mockUsers.find(u => u.id === userId);
+            if (user && !communityFriends.some(friend => friend.id === userId)) {
+                communityFriends.push(user);
+                saveCommunityData();
+                showToast('👥 Teman Ditambahkan', `${user.name} telah ditambahkan sebagai teman`);
+                
+                // Update UI
+                if (document.getElementById('communityFriends').style.display !== 'none') {
+                    loadFriends();
+                }
+                
+                // Close modal if open
+                const modal = bootstrap.Modal.getInstance(document.getElementById('addFriendModal'));
+                if (modal) modal.hide();
+            }
+        }
+
         // Chatbot Functions
         function showChatbot() {
             showLoading();
@@ -2438,6 +3949,7 @@
                 document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
                 document.getElementById('chatbotPage').classList.add('active');
                 currentChatType = 'dashboard';
+                updateNavigation('chatbot');
                 hideLoading();
             }, 800);
         }
@@ -2572,6 +4084,14 @@
         function processAIMessage(message) {
             const lowerMsg = message.toLowerCase();
             
+            if (lowerMsg.includes('komunitas') || lowerMsg.includes('teman') || lowerMsg.includes('komunitas')) {
+                return getCommunityResponse();
+            }
+            
+            if (lowerMsg.includes('tantangan') || lowerMsg.includes('challenge')) {
+                return getChallengeResponse();
+            }
+            
             if (lowerMsg.includes('berapa kalori') || lowerMsg.includes('hitung kalori') || lowerMsg.includes('kalori dalam')) {
                 return calculateCaloriesResponse(message);
             }
@@ -2634,6 +4154,65 @@
             return getDefaultResponse();
         }
 
+        function getCommunityResponse() {
+            return `
+                <p>👥 <strong>Fitur Komunitas BiteCount:</strong></p>
+                
+                <div class="nutrition-tip">
+                    <p><strong>✨ Apa yang bisa Anda lakukan di komunitas:</strong></p>
+                    <ul class="mb-0">
+                        <li>📝 <strong>Bagikan postingan</strong> tentang pencapaian Anda</li>
+                        <li>🎯 <strong>Ikuti tantangan</strong> bersama komunitas</li>
+                        <li>🏆 <strong>Lihat peringkat</strong> di leaderboard</li>
+                        <li>👥 <strong>Bergabung dengan grup</strong> sesuai minat</li>
+                        <li>🤝 <strong>Tambah teman</strong> untuk saling mendukung</li>
+                    </ul>
+                </div>
+                
+                <p class="mt-3"><strong>🏆 Pencapaian yang bisa Anda dapatkan:</strong></p>
+                <div class="d-flex flex-wrap gap-2">
+                    <span class="achievement-badge"><i class="fas fa-fire"></i> Streak 7 Hari</span>
+                    <span class="achievement-badge"><i class="fas fa-trophy"></i> Tantangan Selesai</span>
+                    <span class="achievement-badge"><i class="fas fa-users"></i> Komunitas Aktif</span>
+                </div>
+                
+                <p class="mt-3">Klik tombol 👥 di dashboard untuk mulai menjelajahi komunitas!</p>
+                
+                <button class="quick-reply-btn mt-2" onclick="showCommunity()">
+                    <i class="fas fa-users me-1"></i> Buka Komunitas
+                </button>
+            `;
+        }
+
+        function getChallengeResponse() {
+            return `
+                <p>🎯 <strong>Tantangan Komunitas BiteCount:</strong></p>
+                
+                <div class="nutrition-tip">
+                    <p><strong>🔥 Tantangan yang sedang aktif:</strong></p>
+                    <div>• <strong>30 Days Water Challenge</strong> - Minum 2L air/hari (${communityChallenges[0]?.participants || 0} peserta)</div>
+                    <div>• <strong>10k Steps Daily</strong> - 10.000 langkah/hari (${communityChallenges[1]?.participants || 0} peserta)</div>
+                    <div>• <strong>Vegetarian Week</strong> - Makan vegetarian 7 hari (${communityChallenges[2]?.participants || 0} peserta)</div>
+                </div>
+                
+                <p class="mt-3"><strong>💪 Manfaat ikut tantangan:</strong></p>
+                <div>• Meningkatkan motivasi dan konsistensi</div>
+                <div>• Dukungan dari komunitas</div>
+                <div>• Track progress yang terstruktur</div>
+                <div>• Dapatkan achievement dan poin</div>
+                
+                <div class="d-flex gap-2 mt-3">
+                    <button class="quick-reply-btn" onclick="showCommunity()">
+                        <i class="fas fa-flag me-1"></i> Lihat Tantangan
+                    </button>
+                    <button class="quick-reply-btn" onclick="sendQuickReply('Tips konsisten olahraga')">
+                        <i class="fas fa-dumbbell me-1"></i> Tips Konsisten
+                    </button>
+                </div>
+            `;
+        }
+
+        // Rest of the AI processing functions remain the same as before...
         function processWelcomeMessage(message) {
             const lowerMsg = message.toLowerCase();
             
@@ -2771,6 +4350,7 @@
             `;
         }
 
+        // Rest of the existing functions remain the same...
         function calculateCaloriesResponse(message) {
             const lowerMsg = message.toLowerCase();
             let foundFood = null;
@@ -3903,6 +5483,14 @@
             const data = {
                 userData,
                 foodLog,
+                communityData: {
+                    posts: communityPosts,
+                    challenges: communityChallenges,
+                    groups: communityGroups,
+                    friends: communityFriends,
+                    leaderboard: communityLeaderboard,
+                    achievements: userAchievements
+                },
                 exportDate: new Date().toISOString(),
                 totalCalories: foodLog.reduce((sum, f) => sum + f.calories, 0)
             };
@@ -3933,6 +5521,15 @@
             } else {
                 document.body.style.background = '';
                 document.body.style.color = '';
+            }
+        });
+
+        // Community switch
+        document.getElementById('communitySwitch')?.addEventListener('change', function(e) {
+            if (!e.target.checked) {
+                showToast('👥 Komunitas', 'Fitur komunitas telah dinonaktifkan');
+            } else {
+                showToast('👥 Komunitas', 'Fitur komunitas telah diaktifkan');
             }
         });
     </script>
