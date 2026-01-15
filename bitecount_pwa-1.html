@@ -2127,15 +2127,31 @@
                         <div class="nutrition-tip">
                             <p class="mb-2"><strong>✨ Yang bisa saya bantu:</strong></p>
                             <ul class="mb-0">
+                                <li>🔢 <strong>Hitung kalori</strong> untuk makanan/minuman</li>
                                 <li>📸 <strong>Analisis gambar</strong> makanan & estimasi kalori</li>
                                 <li>📄 <strong>Analisis dokumen</strong> label nutrisi & resep</li>
                                 <li>💡 <strong>Rekomendasi makanan</strong> sesuai target Anda</li>
-                                <li>🔢 <strong>Menghitung kalori</strong> dalam makanan umum</li>
                                 <li>🥗 <strong>Saran menu harian</strong> yang seimbang</li>
                             </ul>
                         </div>
                         
-                        <p class="mt-3">Coba fitur-fitur saya:</p>
+                        <p class="mt-3">Coba hitung kalori makanan:</p>
+                        <div>
+                            <button class="quick-reply-btn" onclick="sendQuickReply('100 gram nasi')">
+                                🍚 100 gram nasi
+                            </button>
+                            <button class="quick-reply-btn" onclick="sendQuickReply('2 butir telur')">
+                                🥚 2 butir telur
+                            </button>
+                            <button class="quick-reply-btn" onclick="sendQuickReply('1 porsi ayam goreng')">
+                                🍗 1 porsi ayam
+                            </button>
+                            <button class="quick-reply-btn" onclick="sendQuickReply('200 ml susu')">
+                                🥛 200 ml susu
+                            </button>
+                        </div>
+                        
+                        <p class="mt-3">Atau coba fitur lainnya:</p>
                         <div>
                             <button class="quick-reply-btn" onclick="showImageUploadModal()">
                                 <i class="fas fa-image me-1"></i> Upload Gambar Makanan
@@ -2145,6 +2161,9 @@
                             </button>
                             <button class="quick-reply-btn" onclick="sendQuickReply('Rekomendasi makanan sehat')">
                                 <i class="fas fa-utensils me-1"></i> Rekomendasi Makanan
+                            </button>
+                            <button class="quick-reply-btn" onclick="sendQuickReply('Daftar makanan dalam database')">
+                                <i class="fas fa-list me-1"></i> Database Makanan
                             </button>
                         </div>
                     </div>
@@ -2156,7 +2175,7 @@
                     <button class="btn-outline" onclick="showImageUploadModal()" title="Upload File">
                         <i class="fas fa-paperclip"></i>
                     </button>
-                    <input type="text" class="form-control" id="chatInput" placeholder="Ketik pesan atau upload file untuk analisis...">
+                    <input type="text" class="form-control" id="chatInput" placeholder="Contoh: 100 gram nasi, 2 butir telur, 1 porsi ayam...">
                     <button class="btn-primary" onclick="sendMessage()" style="padding: 14px 24px;">
                         <i class="fas fa-paper-plane"></i>
                     </button>
@@ -2671,28 +2690,344 @@
         let communityLeaderboard = [];
         let userAchievements = [];
 
-        // Food Database (Makanan Lokal Indonesia - Updated)
+        // Enhanced Food Database
         const foodDatabase = [
-            { name: "Nasi Putih", calories: 204, protein: 4, carbs: 45, fat: 0.4, portion: "100g" },
-            { name: "Nasi Goreng", calories: 333, protein: 8, carbs: 53, fat: 10, portion: "1 porsi" },
-            { name: "Ayam Goreng", calories: 246, protein: 27, carbs: 0, fat: 15, portion: "1 potong" },
-            { name: "Rendang Sapi", calories: 468, protein: 21, carbs: 6, fat: 40, portion: "1 porsi" },
-            { name: "Gado-gado", calories: 275, protein: 11, carbs: 28, fat: 13, portion: "1 porsi" },
-            { name: "Sate Ayam", calories: 210, protein: 25, carbs: 3, fat: 11, portion: "5 tusuk" },
-            { name: "Tempe Goreng", calories: 192, protein: 19, carbs: 9, fat: 11, portion: "100g" },
-            { name: "Tahu Goreng", calories: 76, protein: 8, carbs: 1.9, fat: 5, portion: "100g" },
-            { name: "Telur Dadar", calories: 154, protein: 11, carbs: 1, fat: 12, portion: "1 butir" },
-            { name: "Mie Goreng", calories: 400, protein: 12, carbs: 60, fat: 12, portion: "1 porsi" },
-            { name: "Soto Ayam", calories: 220, protein: 15, carbs: 20, fat: 8, portion: "1 mangkuk" },
-            { name: "Bakso Sapi", calories: 180, protein: 10, carbs: 15, fat: 9, portion: "1 mangkuk" },
-            { name: "Nasi Uduk", calories: 300, protein: 6, carbs: 50, fat: 8, portion: "1 porsi" },
-            { name: "Pecel Lele", calories: 350, protein: 20, carbs: 25, fat: 18, portion: "1 porsi" },
-            { name: "Sayur Asem", calories: 80, protein: 3, carbs: 12, fat: 2, portion: "1 mangkuk" },
-            { name: "Salad Buah", calories: 120, protein: 2, carbs: 25, fat: 1, portion: "1 mangkuk" },
-            { name: "Yogurt Plain", calories: 59, protein: 10, carbs: 4, fat: 0.4, portion: "100g" },
-            { name: "Alpukat", calories: 160, protein: 2, carbs: 9, fat: 15, portion: "1 buah" },
-            { name: "Pisang", calories: 105, protein: 1.3, carbs: 27, fat: 0.4, portion: "1 buah" },
-            { name: "Oatmeal", calories: 158, protein: 6, carbs: 27, fat: 3, portion: "40g" }
+            // Rice & Grains
+            { 
+                name: "Nasi Putih", 
+                calories: 130, 
+                protein: 2.7, 
+                carbs: 28, 
+                fat: 0.3, 
+                portion: "100g",
+                baseQuantity: 100,
+                category: "grains",
+                description: "Karbohidrat utama Indonesia, sumber energi",
+                benefits: "Sumber energi cepat, mudah dicerna"
+            },
+            { 
+                name: "Nasi Merah", 
+                calories: 111, 
+                protein: 2.6, 
+                carbs: 23, 
+                fat: 0.9, 
+                portion: "100g",
+                category: "grains",
+                description: "Nasi dengan serat lebih tinggi",
+                benefits: "Serat tinggi, indeks glikemik rendah"
+            },
+            
+            // Proteins
+            { 
+                name: "Ayam Goreng", 
+                calories: 246, 
+                protein: 27, 
+                carbs: 0, 
+                fat: 15, 
+                portion: "100g",
+                category: "protein",
+                description: "Ayam digoreng dengan tepung",
+                tips: "Hindari kulit untuk mengurangi lemak"
+            },
+            { 
+                name: "Ayam Panggang", 
+                calories: 165, 
+                protein: 31, 
+                carbs: 0, 
+                fat: 3.6, 
+                portion: "100g",
+                category: "protein",
+                description: "Ayam dipanggang tanpa kulit"
+            },
+            { 
+                name: "Telur Dadar", 
+                calories: 154, 
+                protein: 11, 
+                carbs: 1, 
+                fat: 12, 
+                portion: "1 butir (50g)",
+                baseQuantity: 50,
+                category: "protein"
+            },
+            { 
+                name: "Telur Rebus", 
+                calories: 78, 
+                protein: 6, 
+                carbs: 1, 
+                fat: 5, 
+                portion: "1 butir (50g)",
+                baseQuantity: 50,
+                category: "protein"
+            },
+            
+            // Vegetarian Proteins
+            { 
+                name: "Tempe Goreng", 
+                calories: 192, 
+                protein: 19, 
+                carbs: 9, 
+                fat: 11, 
+                portion: "100g",
+                category: "protein",
+                benefits: "Protein nabati, mengandung probiotik"
+            },
+            { 
+                name: "Tahu Goreng", 
+                calories: 76, 
+                protein: 8, 
+                carbs: 1.9, 
+                fat: 5, 
+                portion: "100g",
+                category: "protein"
+            },
+            
+            // Indonesian Dishes
+            { 
+                name: "Rendang Sapi", 
+                calories: 468, 
+                protein: 21, 
+                carbs: 6, 
+                fat: 40, 
+                portion: "100g",
+                category: "main-dish"
+            },
+            { 
+                name: "Sate Ayam", 
+                calories: 210, 
+                protein: 25, 
+                carbs: 3, 
+                fat: 11, 
+                portion: "5 tusuk (100g)",
+                baseQuantity: 100,
+                category: "main-dish"
+            },
+            { 
+                name: "Gado-gado", 
+                calories: 275, 
+                protein: 11, 
+                carbs: 28, 
+                fat: 13, 
+                portion: "1 porsi (300g)",
+                baseQuantity: 300,
+                category: "main-dish"
+            },
+            { 
+                name: "Soto Ayam", 
+                calories: 220, 
+                protein: 15, 
+                carbs: 20, 
+                fat: 8, 
+                portion: "1 mangkuk (400ml)",
+                baseQuantity: 400,
+                category: "soup"
+            },
+            
+            // Noodles
+            { 
+                name: "Mie Goreng", 
+                calories: 400, 
+                protein: 12, 
+                carbs: 60, 
+                fat: 12, 
+                portion: "1 porsi (200g)",
+                baseQuantity: 200,
+                category: "noodles"
+            },
+            { 
+                name: "Mie Rebus", 
+                calories: 350, 
+                protein: 10, 
+                carbs: 55, 
+                fat: 8, 
+                portion: "1 porsi (200g)",
+                baseQuantity: 200,
+                category: "noodles"
+            },
+            
+            // Vegetables
+            { 
+                name: "Sayur Bayam", 
+                calories: 23, 
+                protein: 2.9, 
+                carbs: 3.6, 
+                fat: 0.4, 
+                portion: "100g",
+                category: "vegetables"
+            },
+            { 
+                name: "Brokoli Rebus", 
+                calories: 35, 
+                protein: 2.4, 
+                carbs: 7.2, 
+                fat: 0.4, 
+                portion: "100g",
+                category: "vegetables"
+            },
+            
+            // Fruits
+            { 
+                name: "Pisang", 
+                calories: 89, 
+                protein: 1.1, 
+                carbs: 23, 
+                fat: 0.3, 
+                portion: "1 buah (100g)",
+                baseQuantity: 100,
+                category: "fruits"
+            },
+            { 
+                name: "Apel", 
+                calories: 52, 
+                protein: 0.3, 
+                carbs: 14, 
+                fat: 0.2, 
+                portion: "1 buah (100g)",
+                baseQuantity: 100,
+                category: "fruits"
+            },
+            { 
+                name: "Alpukat", 
+                calories: 160, 
+                protein: 2, 
+                carbs: 9, 
+                fat: 15, 
+                portion: "1 buah (150g)",
+                baseQuantity: 150,
+                category: "fruits"
+            },
+            
+            // Dairy & Alternatives
+            { 
+                name: "Susu Full Cream", 
+                calories: 61, 
+                protein: 3.2, 
+                carbs: 4.7, 
+                fat: 3.3, 
+                portion: "100ml",
+                baseQuantity: 100,
+                category: "dairy"
+            },
+            { 
+                name: "Susu Low Fat", 
+                calories: 42, 
+                protein: 3.4, 
+                carbs: 5, 
+                fat: 1, 
+                portion: "100ml",
+                baseQuantity: 100,
+                category: "dairy"
+            },
+            { 
+                name: "Yogurt Plain", 
+                calories: 59, 
+                protein: 10, 
+                carbs: 4, 
+                fat: 0.4, 
+                portion: "100g",
+                category: "dairy"
+            },
+            
+            // Beverages
+            { 
+                name: "Air Mineral", 
+                calories: 0, 
+                protein: 0, 
+                carbs: 0, 
+                fat: 0, 
+                portion: "100ml",
+                baseQuantity: 100,
+                category: "beverages"
+            },
+            { 
+                name: "Teh Manis", 
+                calories: 30, 
+                protein: 0, 
+                carbs: 8, 
+                fat: 0, 
+                portion: "100ml",
+                baseQuantity: 100,
+                category: "beverages"
+            },
+            { 
+                name: "Kopi Hitam", 
+                calories: 2, 
+                protein: 0.3, 
+                carbs: 0, 
+                fat: 0, 
+                portion: "100ml",
+                baseQuantity: 100,
+                category: "beverages"
+            },
+            { 
+                name: "Kopi Susu", 
+                calories: 45, 
+                protein: 2, 
+                carbs: 5, 
+                fat: 2, 
+                portion: "100ml",
+                baseQuantity: 100,
+                category: "beverages"
+            },
+            { 
+                name: "Jus Jeruk", 
+                calories: 45, 
+                protein: 0.7, 
+                carbs: 10, 
+                fat: 0.2, 
+                portion: "100ml",
+                baseQuantity: 100,
+                category: "beverages"
+            },
+            { 
+                name: "Jus Alpukat", 
+                calories: 120, 
+                protein: 1.5, 
+                carbs: 6, 
+                fat: 11, 
+                portion: "100ml",
+                baseQuantity: 100,
+                category: "beverages"
+            },
+            
+            // Snacks
+            { 
+                name: "Keripik Kentang", 
+                calories: 536, 
+                protein: 7, 
+                carbs: 53, 
+                fat: 35, 
+                portion: "100g",
+                category: "snacks"
+            },
+            { 
+                name: "Kacang Almond", 
+                calories: 579, 
+                protein: 21, 
+                carbs: 22, 
+                fat: 50, 
+                portion: "100g",
+                category: "snacks"
+            },
+            
+            // Breakfast
+            { 
+                name: "Oatmeal", 
+                calories: 68, 
+                protein: 2.4, 
+                carbs: 12, 
+                fat: 1.4, 
+                portion: "100g matang",
+                category: "breakfast"
+            },
+            { 
+                name: "Roti Gandum", 
+                calories: 247, 
+                protein: 13, 
+                carbs: 41, 
+                fat: 3.4, 
+                portion: "100g",
+                category: "breakfast"
+            }
         ];
 
         // Mock Community Data
@@ -4080,20 +4415,35 @@
             if (indicator) indicator.remove();
         }
 
-        // AI Message Processing
+        // AI Message Processing - UPDATED
         function processAIMessage(message) {
             const lowerMsg = message.toLowerCase();
             
+            // Check for pattern "X gram/porsi/sendok/etc [nama makanan]"
+            const caloriePattern = /(\d+)\s*(gram|gr|g|porsi|potong|sendok|sdm|butir|buah|iris|gelas|ml|l|liter)?\s+(.+)/i;
+            const match = message.match(caloriePattern);
+            
+            if (match) {
+                const quantity = parseInt(match[1]);
+                const unit = match[2] ? match[2].toLowerCase() : 'gram';
+                const foodName = match[3].trim();
+                
+                return calculateSpecificFoodCalories(foodName, quantity, unit);
+            }
+            
+            // Check for direct calorie questions
+            if (lowerMsg.includes('berapa kalori') || lowerMsg.includes('hitung kalori') || 
+                lowerMsg.includes('kalori dalam') || lowerMsg.includes('kalori dari')) {
+                return calculateCaloriesResponse(message);
+            }
+            
+            // Check for community questions
             if (lowerMsg.includes('komunitas') || lowerMsg.includes('teman') || lowerMsg.includes('komunitas')) {
                 return getCommunityResponse();
             }
             
             if (lowerMsg.includes('tantangan') || lowerMsg.includes('challenge')) {
                 return getChallengeResponse();
-            }
-            
-            if (lowerMsg.includes('berapa kalori') || lowerMsg.includes('hitung kalori') || lowerMsg.includes('kalori dalam')) {
-                return calculateCaloriesResponse(message);
             }
             
             if (lowerMsg.includes('rekomendasi') || lowerMsg.includes('saran') || lowerMsg.includes('menu')) {
@@ -4150,283 +4500,450 @@
                 `;
             }
             
+            // Check for food database lookup
+            if (lowerMsg.includes('daftar makanan') || lowerMsg.includes('database makanan') || 
+                lowerMsg.includes('apa saja makanan')) {
+                return getFoodDatabaseList();
+            }
+            
+            // Check for specific food lookup
+            const foundFood = searchFoodInDatabase(lowerMsg);
+            if (foundFood) {
+                return showFoodInfo(foundFood);
+            }
+            
             // Default response
             return getDefaultResponse();
         }
 
-        function getCommunityResponse() {
-            return `
-                <p>👥 <strong>Fitur Komunitas BiteCount:</strong></p>
-                
-                <div class="nutrition-tip">
-                    <p><strong>✨ Apa yang bisa Anda lakukan di komunitas:</strong></p>
-                    <ul class="mb-0">
-                        <li>📝 <strong>Bagikan postingan</strong> tentang pencapaian Anda</li>
-                        <li>🎯 <strong>Ikuti tantangan</strong> bersama komunitas</li>
-                        <li>🏆 <strong>Lihat peringkat</strong> di leaderboard</li>
-                        <li>👥 <strong>Bergabung dengan grup</strong> sesuai minat</li>
-                        <li>🤝 <strong>Tambah teman</strong> untuk saling mendukung</li>
-                    </ul>
-                </div>
-                
-                <p class="mt-3"><strong>🏆 Pencapaian yang bisa Anda dapatkan:</strong></p>
-                <div class="d-flex flex-wrap gap-2">
-                    <span class="achievement-badge"><i class="fas fa-fire"></i> Streak 7 Hari</span>
-                    <span class="achievement-badge"><i class="fas fa-trophy"></i> Tantangan Selesai</span>
-                    <span class="achievement-badge"><i class="fas fa-users"></i> Komunitas Aktif</span>
-                </div>
-                
-                <p class="mt-3">Klik tombol 👥 di dashboard untuk mulai menjelajahi komunitas!</p>
-                
-                <button class="quick-reply-btn mt-2" onclick="showCommunity()">
-                    <i class="fas fa-users me-1"></i> Buka Komunitas
-                </button>
-            `;
-        }
-
-        function getChallengeResponse() {
-            return `
-                <p>🎯 <strong>Tantangan Komunitas BiteCount:</strong></p>
-                
-                <div class="nutrition-tip">
-                    <p><strong>🔥 Tantangan yang sedang aktif:</strong></p>
-                    <div>• <strong>30 Days Water Challenge</strong> - Minum 2L air/hari (${communityChallenges[0]?.participants || 0} peserta)</div>
-                    <div>• <strong>10k Steps Daily</strong> - 10.000 langkah/hari (${communityChallenges[1]?.participants || 0} peserta)</div>
-                    <div>• <strong>Vegetarian Week</strong> - Makan vegetarian 7 hari (${communityChallenges[2]?.participants || 0} peserta)</div>
-                </div>
-                
-                <p class="mt-3"><strong>💪 Manfaat ikut tantangan:</strong></p>
-                <div>• Meningkatkan motivasi dan konsistensi</div>
-                <div>• Dukungan dari komunitas</div>
-                <div>• Track progress yang terstruktur</div>
-                <div>• Dapatkan achievement dan poin</div>
-                
-                <div class="d-flex gap-2 mt-3">
-                    <button class="quick-reply-btn" onclick="showCommunity()">
-                        <i class="fas fa-flag me-1"></i> Lihat Tantangan
-                    </button>
-                    <button class="quick-reply-btn" onclick="sendQuickReply('Tips konsisten olahraga')">
-                        <i class="fas fa-dumbbell me-1"></i> Tips Konsisten
-                    </button>
-                </div>
-            `;
-        }
-
-        // Rest of the AI processing functions remain the same as before...
-        function processWelcomeMessage(message) {
-            const lowerMsg = message.toLowerCase();
-            
-            if (lowerMsg.includes('cara hitung') || lowerMsg.includes('menghitung') || lowerMsg.includes('kebutuhan kalori')) {
-                return `
-                    <p>🧮 <strong>Cara Menghitung Kebutuhan Kalori:</strong></p>
-                    
-                    <div class="food-recommendation">
-                        <p><strong>1. BMR (Basal Metabolic Rate):</strong></p>
-                        <div>• <strong>Pria:</strong> (10 × berat kg) + (6.25 × tinggi cm) - (5 × usia) + 5</div>
-                        <div>• <strong>Wanita:</strong> (10 × berat kg) + (6.25 × tinggi cm) - (5 × usia) - 161</div>
-                        
-                        <p class="mt-3"><strong>2. TDEE (Total Daily Energy Expenditure):</strong></p>
-                        <div>• <strong>Rumus:</strong> BMR × tingkat aktivitas</div>
-                        <div>• Sangat sedentari (jarang olahraga): ×1.2</div>
-                        <div>• Sedikit aktif (1-3x/minggu): ×1.375</div>
-                        <div>• Cukup aktif (3-5x/minggu): ×1.55</div>
-                        <div>• Sangat aktif (6-7x/minggu): ×1.725</div>
-                        <div>• Ekstra aktif (olahraga 2x sehari): ×1.9</div>
-                        
-                        <p class="mt-3"><strong>3. Target Kalori Harian:</strong></p>
-                        <div>• <span class="text-green">Turun berat:</span> TDEE - 500 kkal</div>
-                        <div>• <span class="text-pink">Pertahankan:</span> TDEE</div>
-                        <div>• <span class="text-gradient">Naik berat:</span> TDEE + 500 kkal</div>
-                    </div>
-                    
-                    <p class="mt-3"><strong>Contoh:</strong> Pria 30 tahun, 70kg, 170cm, aktivitas sedang = ±2500 kkal/hari</p>
-                    
-                    <button class="quick-reply-btn mt-2" onclick="sendWelcomeQuickReply('Apa itu BMR dan TDEE?')">
-                        📚 Pelajari Lebih Lanjut
-                    </button>
-                `;
-            }
-            
-            if (lowerMsg.includes('tips') || lowerMsg.includes('pemula') || lowerMsg.includes('awal')) {
-                return `
-                    <p>💡 <strong>Tips Diet Sehat untuk Pemula:</strong></p>
-                    
-                    <div class="nutrition-tip">
-                        <p><strong>Prinsip Dasar Diet Sehat:</strong></p>
-                        <div>1. <strong>Konsistensi</strong> lebih penting daripada kesempurnaan</div>
-                        <div>2. <strong>Minum air</strong> 2-3 liter per hari</div>
-                        <div>3. <strong>Makan perlahan</strong>, kunyah dengan baik</div>
-                        <div>4. <strong>Protein setiap makan</strong> untuk kenyang lebih lama</div>
-                        <div>5. <strong>Sayuran</strong> setengah piring setiap makan</div>
-                    </div>
-                    
-                    <div class="food-recommendation mt-3">
-                        <p><strong>Langkah Awal yang Praktis:</strong></p>
-                        <div>1. Hitung kebutuhan kalori (saya bantu!)</div>
-                        <div>2. Mulai tracking makanan 3 hari pertama</div>
-                        <div>3. Fokus pada protein dan serat</div>
-                        <div>4. Kurangi minuman manis bertahap</div>
-                        <div>5. Tambahkan jalan kaki 30 menit/hari</div>
-                    </div>
-                    
-                    <p class="mt-3">🎯 <strong>Target realistis:</strong> 0.5-1kg per minggu untuk penurunan berat badan yang sehat dan berkelanjutan.</p>
-                `;
-            }
-            
-            if (lowerMsg.includes('upload') || lowerMsg.includes('gambar') || lowerMsg.includes('foto')) {
-                return `
-                    <p>📸 <strong>Analisis Gambar Makanan:</strong></p>
-                    <p>Saya menggunakan teknologi AI canggih untuk menganalisis foto makanan Anda:</p>
-                    
-                    <div class="nutrition-tip">
-                        <div>✅ <strong>Estimasi kalori</strong> berdasarkan jenis dan porsi makanan</div>
-                        <div>✅ <strong>Identifikasi nutrisi</strong> (protein, karbohidrat, lemak)</div>
-                        <div>✅ <strong>Rekomendasi porsi</strong> sesuai target Anda</div>
-                        <div>✅ <strong>Tips modifikasi</strong> untuk versi lebih sehat</div>
-                    </div>
-                    
-                    <p class="mt-3"><strong>Cara menggunakan:</strong></p>
-                    <ol>
-                        <li>Klik tombol 📸 di bawah</li>
-                        <li>Ambil foto makanan atau pilih dari galeri</li>
-                        <li>Tunggu analisis 2-3 detik</li>
-                        <li>Dapatkan analisis nutrisi lengkap!</li>
-                    </ol>
-                    
-                    <div class="text-center mt-3">
-                        <button class="quick-reply-btn" onclick="showImageUploadModal()">
-                            <i class="fas fa-camera me-1"></i> Ambil/Upload Foto
-                        </button>
-                    </div>
-                `;
-            }
-            
-            if (lowerMsg.includes('bmr') || lowerMsg.includes('tdee')) {
-                return `
-                    <p>📊 <strong>Memahami BMR dan TDEE:</strong></p>
-                    
-                    <div class="nutrition-tip">
-                        <p><strong>BMR (Basal Metabolic Rate):</strong></p>
-                        <div>• Kalori yang tubuh bakar saat istirahat total (tidur)</div>
-                        <div>• Untuk fungsi dasar: bernapas, sirkulasi darah, sel regenerasi</div>
-                        <div>• Sekitar 60-70% total pengeluaran kalori harian</div>
-                    </div>
-                    
-                    <div class="food-recommendation mt-3">
-                        <p><strong>TDEE (Total Daily Energy Expenditure):</strong></p>
-                        <div>• Total kalori yang tubuh bakar dalam sehari</div>
-                        <div>• Termasuk BMR + aktivitas fisik + pencernaan makanan</div>
-                        <div>• Angka ini menentukan kebutuhan kalori harian Anda</div>
-                    </div>
-                    
-                    <p class="mt-3"><strong>Contoh:</strong></p>
-                    <div>BMR Anda: 1600 kkal</div>
-                    <div>Aktivitas fisik: 400 kkal</div>
-                    <div>Pencernaan: 100 kkal</div>
-                    <div><strong>TDEE: 2100 kkal</strong></div>
-                `;
-            }
-            
-            // Default welcome response
-            return `
-                <p>Saya bisa membantu Anda memulai perjalanan nutrisi yang sehat dengan:</p>
-                
-                <div class="d-flex flex-wrap gap-2 mt-3">
-                    <button class="quick-reply-btn" onclick="sendWelcomeQuickReply('Bagaimana cara menghitung kebutuhan kalori?')">
-                        🧮 Hitung Kebutuhan Kalori
-                    </button>
-                    <button class="quick-reply-btn" onclick="sendWelcomeQuickReply('Tips diet sehat untuk pemula')">
-                        💡 Tips Diet Pemula
-                    </button>
-                    <button class="quick-reply-btn" onclick="showImageUploadModal()">
-                        📸 Analisis Foto Makanan
-                    </button>
-                    <button class="quick-reply-btn" onclick="sendWelcomeQuickReply('Apa itu BMR dan TDEE?')">
-                        📊 Penjelasan BMR & TDEE
-                    </button>
-                </div>
-                
-                <p class="mt-3">Atau tanyakan langsung tentang nutrisi, diet, dan gaya hidup sehat!</p>
-            `;
-        }
-
-        // Rest of the existing functions remain the same...
-        function calculateCaloriesResponse(message) {
-            const lowerMsg = message.toLowerCase();
-            let foundFood = null;
-            
+        // New function to calculate specific food calories
+        function calculateSpecificFoodCalories(foodName, quantity, unit) {
             // Search for food in database
-            for (const food of foodDatabase) {
-                if (lowerMsg.includes(food.name.toLowerCase())) {
-                    foundFood = food;
-                    break;
-                }
-            }
+            const food = searchFoodInDatabase(foodName);
             
-            if (foundFood) {
+            if (food) {
+                // Convert quantity to grams if needed
+                const quantityInGrams = convertToGrams(quantity, unit, foodName);
+                
+                // Calculate calories based on quantity
+                const calories = Math.round((food.calories / (food.baseQuantity || 100)) * quantityInGrams);
+                const protein = Math.round((food.protein / (food.baseQuantity || 100)) * quantityInGrams);
+                const carbs = Math.round((food.carbs / (food.baseQuantity || 100)) * quantityInGrams);
+                const fat = Math.round((food.fat / (food.baseQuantity || 100)) * quantityInGrams);
+                
+                let unitDisplay = unit === 'gram' || unit === 'gr' || unit === 'g' ? 'gram' : unit;
+                
                 return `
-                    <p>🍽️ <strong>Informasi Nutrisi untuk ${foundFood.name}:</strong></p>
+                    <p>🔢 <strong>Perhitungan Kalori untuk ${quantity} ${unitDisplay} ${food.name}:</strong></p>
                     
                     <div class="food-recommendation">
                         <div class="d-flex justify-content-between mb-2">
-                            <span>Ukuran Porsi:</span>
-                            <strong>${foundFood.portion}</strong>
+                            <span>Ukuran:</span>
+                            <strong>${quantity} ${unitDisplay}</strong>
                         </div>
                         <div class="d-flex justify-content-between mb-2">
-                            <span>🔥 Kalori:</span>
-                            <strong class="text-green">${foundFood.calories} kkal</strong>
+                            <span>🔥 Total Kalori:</span>
+                            <strong class="text-green">${calories} kkal</strong>
                         </div>
                         <div class="d-flex justify-content-between mb-2">
                             <span>🥩 Protein:</span>
-                            <strong>${foundFood.protein}g</strong>
+                            <strong>${protein}g</strong>
                         </div>
                         <div class="d-flex justify-content-between mb-2">
                             <span>🍚 Karbohidrat:</span>
-                            <strong>${foundFood.carbs}g</strong>
+                            <strong>${carbs}g</strong>
+                        </div>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>🥑 Lemak:</span>
+                            <strong>${fat}g</strong>
                         </div>
                         <div class="d-flex justify-content-between">
-                            <span>🥑 Lemak:</span>
-                            <strong>${foundFood.fat}g</strong>
+                            <span>📊 Per 100g:</span>
+                            <strong>${food.calories} kkal</strong>
                         </div>
                     </div>
                     
-                    <p class="mt-3">Apakah Anda ingin menambahkan makanan ini ke log harian?</p>
+                    <div class="nutrition-tip mt-3">
+                        <p><strong>📝 Informasi Nutrisi ${food.name}:</strong></p>
+                        <div>• ${food.description || getFoodDescription(food.name)}</div>
+                        ${food.benefits ? `<div>• Manfaat: ${food.benefits}</div>` : ''}
+                        ${food.tips ? `<div>• Tips: ${food.tips}</div>` : ''}
+                    </div>
                     
                     <div class="d-flex gap-2 mt-3">
-                        <button class="quick-reply-btn" onclick="addFoodFromChat('${foundFood.name}', ${foundFood.calories}, ${foundFood.protein}, ${foundFood.carbs}, ${foundFood.fat}, '${foundFood.portion}')">
+                        <button class="quick-reply-btn" onclick="addFoodFromChat('${food.name}', ${calories}, ${protein}, ${carbs}, ${fat}, '${quantity} ${unitDisplay}')">
                             <i class="fas fa-plus me-1"></i> Tambah ke Log
                         </button>
                         <button class="quick-reply-btn" onclick="sendQuickReply('Rekomendasi makanan sehat')">
                             <i class="fas fa-utensils me-1"></i> Lihat Rekomendasi
                         </button>
                     </div>
+                    
+                    <p class="mt-3 small text-muted">
+                        💡 <strong>Contoh query lain:</strong><br>
+                        • "50 gram tempe"<br>
+                        • "1 porsi nasi goreng"<br>
+                        • "2 butir telur"<br>
+                        • "200 ml susu"
+                    </p>
                 `;
             } else {
-                const foodName = extractFoodName(message);
                 return `
-                    <p>🔍 <strong>Estimasi Kalori untuk "${foodName}":</strong></p>
+                    <p>🔍 <strong>Makanan "${foodName}" tidak ditemukan dalam database saya.</strong></p>
                     
                     <div class="nutrition-tip">
-                        <p><strong>Perkiraan untuk makanan umum:</strong></p>
-                        <div>🍚 <strong>Nasi putih</strong> (1 porsi): ~200-250 kkal</div>
-                        <div>🍗 <strong>Ayam</strong> (100g): ~165 kkal</div>
-                        <div>🥚 <strong>Telur</strong> (1 butir): ~70 kkal</div>
-                        <div>🥗 <strong>Sayuran</strong> (100g): ~30-50 kkal</div>
-                        <div>🍎 <strong>Buah</strong> (1 potong): ~50-100 kkal</div>
+                        <p><strong>📊 Perkiraan untuk ${quantity} ${unit} ${foodName}:</strong></p>
+                        ${getEstimatedNutrition(foodName, quantity, unit)}
                     </div>
                     
-                    <p class="mt-3">💡 <strong>Tips:</strong> Untuk analisis yang lebih akurat, coba upload foto makanan atau gunakan database makanan saya!</p>
+                    <p class="mt-3">💡 <strong>Tips:</strong></p>
+                    <div>• Gunakan contoh: "100 gram nasi", "1 porsi ayam goreng", "2 butir telur"</div>
+                    <div>• Untuk analisis akurat, upload foto makanan Anda</div>
+                    <div>• Atau cari makanan serupa di database saya</div>
                     
-                    <div class="d-flex gap-2 mt-3">
-                        <button class="quick-reply-btn" onclick="showImageUploadModal()">
-                            <i class="fas fa-image me-1"></i> Upload Foto
-                        </button>
-                        <button class="quick-reply-btn" onclick="sendQuickReply('Rekomendasi makanan sehat')">
-                            <i class="fas fa-list me-1"></i> Lihat Database
-                        </button>
-                    </div>
+                    <button class="quick-reply-btn mt-3" onclick="showImageUploadModal()">
+                        <i class="fas fa-image me-1"></i> Upload Foto Makanan
+                    </button>
+                    
+                    <button class="quick-reply-btn mt-3" onclick="sendQuickReply('Daftar makanan dalam database')">
+                        <i class="fas fa-list me-1"></i> Lihat Database Makanan
+                    </button>
                 `;
             }
+        }
+
+        // Search food in database
+        function searchFoodInDatabase(foodName) {
+            const lowerFoodName = foodName.toLowerCase();
+            
+            // Exact match
+            for (const food of foodDatabase) {
+                if (food.name.toLowerCase() === lowerFoodName || 
+                    food.name.toLowerCase().includes(lowerFoodName) ||
+                    lowerFoodName.includes(food.name.toLowerCase())) {
+                    return food;
+                }
+            }
+            
+            // Partial match
+            for (const food of foodDatabase) {
+                const foodWords = food.name.toLowerCase().split(' ');
+                const inputWords = lowerFoodName.split(' ');
+                
+                const matchCount = inputWords.filter(word => 
+                    foodWords.some(foodWord => foodWord.includes(word) || word.includes(foodWord))
+                ).length;
+                
+                if (matchCount >= Math.min(2, inputWords.length)) {
+                    return food;
+                }
+            }
+            
+            // Alias matching
+            const foodAliases = {
+                'nasi': 'Nasi Putih',
+                'ayam goreng': 'Ayam Goreng',
+                'telur': 'Telur Dadar',
+                'tempe': 'Tempe Goreng',
+                'tahu': 'Tahu Goreng',
+                'sate': 'Sate Ayam',
+                'rendang': 'Rendang Sapi',
+                'soto': 'Soto Ayam',
+                'bakso': 'Bakso Sapi',
+                'mie': 'Mie Goreng',
+                'gado': 'Gado-gado',
+                'pisang': 'Pisang',
+                'alpukat': 'Alpukat',
+                'yogurt': 'Yogurt Plain',
+                'oat': 'Oatmeal',
+                'susu': 'Susu Full Cream',
+                'air': 'Air Mineral',
+                'kopi': 'Kopi Hitam',
+                'teh': 'Teh Manis',
+                'jus': 'Jus Jeruk',
+                'roti': 'Roti Gandum'
+            };
+            
+            for (const [alias, realName] of Object.entries(foodAliases)) {
+                if (lowerFoodName.includes(alias)) {
+                    return foodDatabase.find(f => f.name === realName);
+                }
+            }
+            
+            return null;
+        }
+
+        // Convert units to grams
+        function convertToGrams(quantity, unit, foodName) {
+            const lowerUnit = unit.toLowerCase();
+            const lowerFoodName = foodName.toLowerCase();
+            
+            const conversionRates = {
+                // Weight
+                'gram': 1,
+                'gr': 1,
+                'g': 1,
+                'kg': 1000,
+                'ons': 100,
+                
+                // Volume (approximate for liquids)
+                'ml': 1, // 1ml ≈ 1g for water
+                'liter': 1000,
+                'l': 1000,
+                'gelas': 200, // approx 200ml per glass
+                
+                // Pieces (estimates)
+                'porsi': 150, // average portion size
+                'potong': 50, // average piece size
+                'butir': 50, // average egg size
+                'buah': 100, // average fruit size
+                'iris': 30, // average slice
+                'sendok': 15, // tablespoon
+                'sdm': 15, // tablespoon
+                'sdt': 5, // teaspoon
+                
+                // Beverages
+                'cangkir': 150, // cup
+                'botol': 330, // small bottle
+                'kaleng': 330, // can
+            };
+            
+            // Special cases for specific foods
+            if (lowerFoodName.includes('nasi') && (lowerUnit === 'porsi' || lowerUnit === 'mangkuk')) {
+                return 150; // 1 portion of rice ≈ 150g
+            }
+            
+            if (lowerFoodName.includes('ayam') && lowerUnit === 'potong') {
+                return 100; // 1 piece of chicken ≈ 100g
+            }
+            
+            if (lowerFoodName.includes('telur') && lowerUnit === 'butir') {
+                return 50; // 1 egg ≈ 50g
+            }
+            
+            return conversionRates[lowerUnit] || 100; // default to 100g if unit unknown
+        }
+
+        // Get food description
+        function getFoodDescription(foodName) {
+            const descriptions = {
+                'nasi': 'Sumber karbohidrat utama, memberikan energi untuk aktivitas sehari-hari',
+                'ayam': 'Sumber protein hewani yang baik untuk pertumbuhan dan perbaikan sel',
+                'telur': 'Protein lengkap dengan semua asam amino esensial',
+                'tempe': 'Protein nabati fermentasi yang kaya nutrisi',
+                'tahu': 'Protein nabati rendah lemak dari kacang kedelai',
+                'ikan': 'Sumber protein dan omega-3 yang baik untuk jantung',
+                'sayur': 'Sumber vitamin, mineral, dan serat untuk kesehatan pencernaan',
+                'buah': 'Sumber vitamin, mineral, dan antioksidan alami',
+                'susu': 'Sumber kalsium untuk kesehatan tulang dan gigi'
+            };
+            
+            const lowerName = foodName.toLowerCase();
+            for (const [key, desc] of Object.entries(descriptions)) {
+                if (lowerName.includes(key)) {
+                    return desc;
+                }
+            }
+            
+            return 'Makanan sumber nutrisi penting untuk tubuh';
+        }
+
+        // Get estimated nutrition for unknown foods
+        function getEstimatedNutrition(foodName, quantity, unit) {
+            const lowerName = foodName.toLowerCase();
+            let estimate = '';
+            
+            if (lowerName.includes('nasi') || lowerName.includes('karbo') || lowerName.includes('kentang')) {
+                estimate = `Perkiraan: ${quantity} ${unit} mengandung sekitar ${Math.round(quantity * 1.3)} kkal, terutama dari karbohidrat`;
+            } else if (lowerName.includes('ayam') || lowerName.includes('daging') || lowerName.includes('ikan')) {
+                estimate = `Perkiraan: ${quantity} ${unit} mengandung sekitar ${Math.round(quantity * 2.5)} kkal, tinggi protein`;
+            } else if (lowerName.includes('sayur') || lowerName.includes('brokoli') || lowerName.includes('bayam')) {
+                estimate = `Perkiraan: ${quantity} ${unit} mengandung sekitar ${Math.round(quantity * 0.3)} kkal, rendah kalori tinggi serat`;
+            } else if (lowerName.includes('buah') || lowerName.includes('apel') || lowerName.includes('pisang')) {
+                estimate = `Perkiraan: ${quantity} ${unit} mengandung sekitar ${Math.round(quantity * 0.6)} kkal, sumber vitamin`;
+            } else if (lowerName.includes('minuman') || lowerName.includes('jus') || lowerName.includes('soda')) {
+                estimate = `Perkiraan: ${quantity} ${unit} mengandung sekitar ${Math.round(quantity * 0.4)} kkal, perhatikan kandungan gula`;
+            } else {
+                estimate = `Perkiraan: ${quantity} ${unit} mengandung sekitar ${Math.round(quantity * 1)} kkal`;
+            }
+            
+            return estimate;
+        }
+
+        // Get food database list
+        function getFoodDatabaseList() {
+            const categories = {};
+            
+            // Group foods by category
+            foodDatabase.forEach(food => {
+                if (!categories[food.category]) {
+                    categories[food.category] = [];
+                }
+                categories[food.category].push(food);
+            });
+            
+            let response = `<p>📚 <strong>Database Makanan BiteCount:</strong></p>`;
+            
+            // Create category sections
+            Object.entries(categories).forEach(([category, foods]) => {
+                response += `
+                    <div class="food-recommendation mt-3">
+                        <h6>${getCategoryName(category)}</h6>
+                        <div class="mt-2">
+                `;
+                
+                foods.forEach(food => {
+                    response += `
+                        <div class="d-flex justify-content-between align-items-center py-2 border-bottom">
+                            <div>
+                                <strong>${food.name}</strong>
+                                <div class="small text-muted">${food.portion}</div>
+                            </div>
+                            <div class="text-end">
+                                <div class="text-green"><strong>${food.calories} kkal</strong></div>
+                                <div class="small">🥩${food.protein}g 🍚${food.carbs}g 🥑${food.fat}g</div>
+                            </div>
+                        </div>
+                    `;
+                });
+                
+                response += `</div></div>`;
+            });
+            
+            response += `
+                <div class="nutrition-tip mt-3">
+                    <p><strong>💡 Cara menggunakan:</strong></p>
+                    <div>• Tanya: "100 gram nasi" → hasil: kalori untuk 100g nasi</div>
+                    <div>• Tanya: "2 butir telur" → hasil: kalori untuk 2 telur</div>
+                    <div>• Tanya: "1 porsi ayam goreng" → hasil: kalori 1 porsi ayam</div>
+                </div>
+                
+                <p class="mt-3">🔍 <strong>Coba contoh:</strong></p>
+                <div class="d-flex flex-wrap gap-2">
+                    <button class="quick-reply-btn" onclick="sendQuickReply('100 gram nasi')">
+                        100 gram nasi
+                    </button>
+                    <button class="quick-reply-btn" onclick="sendQuickReply('2 butir telur')">
+                        2 butir telur
+                    </button>
+                    <button class="quick-reply-btn" onclick="sendQuickReply('1 porsi ayam goreng')">
+                        1 porsi ayam
+                    </button>
+                    <button class="quick-reply-btn" onclick="sendQuickReply('200 ml susu')">
+                        200 ml susu
+                    </button>
+                </div>
+            `;
+            
+            return response;
+        }
+
+        // Get category name
+        function getCategoryName(category) {
+            const categoryNames = {
+                'grains': '🌾 Nasi & Biji-bijian',
+                'protein': '🥩 Protein',
+                'main-dish': '🍛 Makanan Utama',
+                'soup': '🍲 Sup & Kuah',
+                'noodles': '🍜 Mie & Pasta',
+                'vegetables': '🥬 Sayuran',
+                'fruits': '🍎 Buah-buahan',
+                'dairy': '🥛 Susu & Produk Susu',
+                'beverages': '🥤 Minuman',
+                'snacks': '🍿 Camilan',
+                'breakfast': '🍳 Sarapan'
+            };
+            
+            return categoryNames[category] || category;
+        }
+
+        // Show food info
+        function showFoodInfo(food) {
+            return `
+                <p>🍽️ <strong>Informasi Nutrisi ${food.name}:</strong></p>
+                
+                <div class="food-recommendation">
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Ukuran Porsi:</span>
+                        <strong>${food.portion}</strong>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>🔥 Kalori:</span>
+                        <strong class="text-green">${food.calories} kkal</strong>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>🥩 Protein:</span>
+                        <strong>${food.protein}g</strong>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>🍚 Karbohidrat:</span>
+                        <strong>${food.carbs}g</strong>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <span>🥑 Lemak:</span>
+                        <strong>${food.fat}g</strong>
+                    </div>
+                </div>
+                
+                ${food.description ? `
+                    <div class="nutrition-tip mt-3">
+                        <p><strong>📝 Deskripsi:</strong></p>
+                        <div>${food.description}</div>
+                    </div>
+                ` : ''}
+                
+                ${food.benefits ? `
+                    <div class="nutrition-tip mt-2">
+                        <p><strong>✅ Manfaat:</strong></p>
+                        <div>${food.benefits}</div>
+                    </div>
+                ` : ''}
+                
+                ${food.tips ? `
+                    <div class="food-recommendation mt-2">
+                        <p><strong>💡 Tips:</strong></p>
+                        <div>${food.tips}</div>
+                    </div>
+                ` : ''}
+                
+                <p class="mt-3"><strong>🔢 Hitung kalori untuk jumlah tertentu:</strong></p>
+                <div class="d-flex flex-wrap gap-2">
+                    <button class="quick-reply-btn" onclick="sendQuickReply('100 gram ${food.name}')">
+                        100 gram
+                    </button>
+                    <button class="quick-reply-btn" onclick="sendQuickReply('1 porsi ${food.name}')">
+                        1 porsi
+                    </button>
+                    <button class="quick-reply-btn" onclick="sendQuickReply('2 ${food.name}')">
+                        2 ${food.name.split(' ')[0]}
+                    </button>
+                </div>
+                
+                <div class="d-flex gap-2 mt-3">
+                    <button class="quick-reply-btn" onclick="addFoodFromChat('${food.name}', ${food.calories}, ${food.protein}, ${food.carbs}, ${food.fat}, '${food.portion}')">
+                        <i class="fas fa-plus me-1"></i> Tambah ke Log
+                    </button>
+                    <button class="quick-reply-btn" onclick="sendQuickReply('Daftar makanan dalam database')">
+                        <i class="fas fa-list me-1"></i> Database Lain
+                    </button>
+                </div>
+            `;
+        }
+
+        // Update calculateCaloriesResponse function
+        function calculateCaloriesResponse(message) {
+            const foodName = extractFoodName(message);
+            const quantityMatch = message.match(/(\d+)\s*(gram|gr|g|porsi|potong|sendok|sdm|butir|buah|iris|gelas|ml|l|liter)?/i);
+            
+            let quantity = 100; // default 100g
+            let unit = 'gram'; // default unit
+            
+            if (quantityMatch) {
+                quantity = parseInt(quantityMatch[1]);
+                unit = quantityMatch[2] ? quantityMatch[2].toLowerCase() : 'gram';
+            }
+            
+            return calculateSpecificFoodCalories(foodName, quantity, unit);
         }
 
         function extractFoodName(message) {
@@ -4775,12 +5292,70 @@
             return response;
         }
 
+        function getCommunityResponse() {
+            return `
+                <p>👥 <strong>Fitur Komunitas BiteCount:</strong></p>
+                
+                <div class="nutrition-tip">
+                    <p><strong>✨ Apa yang bisa Anda lakukan di komunitas:</strong></p>
+                    <ul class="mb-0">
+                        <li>📝 <strong>Bagikan postingan</strong> tentang pencapaian Anda</li>
+                        <li>🎯 <strong>Ikuti tantangan</strong> bersama komunitas</li>
+                        <li>🏆 <strong>Lihat peringkat</strong> di leaderboard</li>
+                        <li>👥 <strong>Bergabung dengan grup</strong> sesuai minat</li>
+                        <li>🤝 <strong>Tambah teman</strong> untuk saling mendukung</li>
+                    </ul>
+                </div>
+                
+                <p class="mt-3"><strong>🏆 Pencapaian yang bisa Anda dapatkan:</strong></p>
+                <div class="d-flex flex-wrap gap-2">
+                    <span class="achievement-badge"><i class="fas fa-fire"></i> Streak 7 Hari</span>
+                    <span class="achievement-badge"><i class="fas fa-trophy"></i> Tantangan Selesai</span>
+                    <span class="achievement-badge"><i class="fas fa-users"></i> Komunitas Aktif</span>
+                </div>
+                
+                <p class="mt-3">Klik tombol 👥 di dashboard untuk mulai menjelajahi komunitas!</p>
+                
+                <button class="quick-reply-btn mt-2" onclick="showCommunity()">
+                    <i class="fas fa-users me-1"></i> Buka Komunitas
+                </button>
+            `;
+        }
+
+        function getChallengeResponse() {
+            return `
+                <p>🎯 <strong>Tantangan Komunitas BiteCount:</strong></p>
+                
+                <div class="nutrition-tip">
+                    <p><strong>🔥 Tantangan yang sedang aktif:</strong></p>
+                    <div>• <strong>30 Days Water Challenge</strong> - Minum 2L air/hari (${communityChallenges[0]?.participants || 0} peserta)</div>
+                    <div>• <strong>10k Steps Daily</strong> - 10.000 langkah/hari (${communityChallenges[1]?.participants || 0} peserta)</div>
+                    <div>• <strong>Vegetarian Week</strong> - Makan vegetarian 7 hari (${communityChallenges[2]?.participants || 0} peserta)</div>
+                </div>
+                
+                <p class="mt-3"><strong>💪 Manfaat ikut tantangan:</strong></p>
+                <div>• Meningkatkan motivasi dan konsistensi</div>
+                <div>• Dukungan dari komunitas</div>
+                <div>• Track progress yang terstruktur</div>
+                <div>• Dapatkan achievement dan poin</div>
+                
+                <div class="d-flex gap-2 mt-3">
+                    <button class="quick-reply-btn" onclick="showCommunity()">
+                        <i class="fas fa-flag me-1"></i> Lihat Tantangan
+                    </button>
+                    <button class="quick-reply-btn" onclick="sendQuickReply('Tips konsisten olahraga')">
+                        <i class="fas fa-dumbbell me-1"></i> Tips Konsisten
+                    </button>
+                </div>
+            `;
+        }
+
         function getDefaultResponse() {
             return `
                 <p>Hmm, saya tidak yakin memahami pertanyaan Anda. Saya bisa membantu dengan:</p>
                 
                 <div class="d-flex flex-wrap gap-2 mt-3">
-                    <button class="quick-reply-btn" onclick="sendQuickReply('Berapa kalori nasi goreng?')">
+                    <button class="quick-reply-btn" onclick="sendQuickReply('100 gram nasi')">
                         🔢 Hitung Kalori Makanan
                     </button>
                     <button class="quick-reply-btn" onclick="sendQuickReply('Rekomendasi makanan sehat')">
@@ -4798,6 +5373,144 @@
                 </div>
                 
                 <p class="mt-3">Atau tanyakan sesuatu yang spesifik tentang nutrisi dan diet!</p>
+            `;
+        }
+
+        // Welcome chatbot processing
+        function processWelcomeMessage(message) {
+            const lowerMsg = message.toLowerCase();
+            
+            if (lowerMsg.includes('cara hitung') || lowerMsg.includes('menghitung') || lowerMsg.includes('kebutuhan kalori')) {
+                return `
+                    <p>🧮 <strong>Cara Menghitung Kebutuhan Kalori:</strong></p>
+                    
+                    <div class="food-recommendation">
+                        <p><strong>1. BMR (Basal Metabolic Rate):</strong></p>
+                        <div>• <strong>Pria:</strong> (10 × berat kg) + (6.25 × tinggi cm) - (5 × usia) + 5</div>
+                        <div>• <strong>Wanita:</strong> (10 × berat kg) + (6.25 × tinggi cm) - (5 × usia) - 161</div>
+                        
+                        <p class="mt-3"><strong>2. TDEE (Total Daily Energy Expenditure):</strong></p>
+                        <div>• <strong>Rumus:</strong> BMR × tingkat aktivitas</div>
+                        <div>• Sangat sedentari (jarang olahraga): ×1.2</div>
+                        <div>• Sedikit aktif (1-3x/minggu): ×1.375</div>
+                        <div>• Cukup aktif (3-5x/minggu): ×1.55</div>
+                        <div>• Sangat aktif (6-7x/minggu): ×1.725</div>
+                        <div>• Ekstra aktif (olahraga 2x sehari): ×1.9</div>
+                        
+                        <p class="mt-3"><strong>3. Target Kalori Harian:</strong></p>
+                        <div>• <span class="text-green">Turun berat:</span> TDEE - 500 kkal</div>
+                        <div>• <span class="text-pink">Pertahankan:</span> TDEE</div>
+                        <div>• <span class="text-gradient">Naik berat:</span> TDEE + 500 kkal</div>
+                    </div>
+                    
+                    <p class="mt-3"><strong>Contoh:</strong> Pria 30 tahun, 70kg, 170cm, aktivitas sedang = ±2500 kkal/hari</p>
+                    
+                    <button class="quick-reply-btn mt-2" onclick="sendWelcomeQuickReply('Apa itu BMR dan TDEE?')">
+                        📚 Pelajari Lebih Lanjut
+                    </button>
+                `;
+            }
+            
+            if (lowerMsg.includes('tips') || lowerMsg.includes('pemula') || lowerMsg.includes('awal')) {
+                return `
+                    <p>💡 <strong>Tips Diet Sehat untuk Pemula:</strong></p>
+                    
+                    <div class="nutrition-tip">
+                        <p><strong>Prinsip Dasar Diet Sehat:</strong></p>
+                        <div>1. <strong>Konsistensi</strong> lebih penting daripada kesempurnaan</div>
+                        <div>2. <strong>Minum air</strong> 2-3 liter per hari</div>
+                        <div>3. <strong>Makan perlahan</strong>, kunyah dengan baik</div>
+                        <div>4. <strong>Protein setiap makan</strong> untuk kenyang lebih lama</div>
+                        <div>5. <strong>Sayuran</strong> setengah piring setiap makan</div>
+                    </div>
+                    
+                    <div class="food-recommendation mt-3">
+                        <p><strong>Langkah Awal yang Praktis:</strong></p>
+                        <div>1. Hitung kebutuhan kalori (saya bantu!)</div>
+                        <div>2. Mulai tracking makanan 3 hari pertama</div>
+                        <div>3. Fokus pada protein dan serat</div>
+                        <div>4. Kurangi minuman manis bertahap</div>
+                        <div>5. Tambahkan jalan kaki 30 menit/hari</div>
+                    </div>
+                    
+                    <p class="mt-3">🎯 <strong>Target realistis:</strong> 0.5-1kg per minggu untuk penurunan berat badan yang sehat dan berkelanjutan.</p>
+                `;
+            }
+            
+            if (lowerMsg.includes('upload') || lowerMsg.includes('gambar') || lowerMsg.includes('foto')) {
+                return `
+                    <p>📸 <strong>Analisis Gambar Makanan:</strong></p>
+                    <p>Saya menggunakan teknologi AI canggih untuk menganalisis foto makanan Anda:</p>
+                    
+                    <div class="nutrition-tip">
+                        <div>✅ <strong>Estimasi kalori</strong> berdasarkan jenis dan porsi makanan</div>
+                        <div>✅ <strong>Identifikasi nutrisi</strong> (protein, karbohidrat, lemak)</div>
+                        <div>✅ <strong>Rekomendasi porsi</strong> sesuai target Anda</div>
+                        <div>✅ <strong>Tips modifikasi</strong> untuk versi lebih sehat</div>
+                    </div>
+                    
+                    <p class="mt-3"><strong>Cara menggunakan:</strong></p>
+                    <ol>
+                        <li>Klik tombol 📸 di bawah</li>
+                        <li>Ambil foto makanan atau pilih dari galeri</li>
+                        <li>Tunggu analisis 2-3 detik</li>
+                        <li>Dapatkan analisis nutrisi lengkap!</li>
+                    </ol>
+                    
+                    <div class="text-center mt-3">
+                        <button class="quick-reply-btn" onclick="showImageUploadModal()">
+                            <i class="fas fa-camera me-1"></i> Ambil/Upload Foto
+                        </button>
+                    </div>
+                `;
+            }
+            
+            if (lowerMsg.includes('bmr') || lowerMsg.includes('tdee')) {
+                return `
+                    <p>📊 <strong>Memahami BMR dan TDEE:</strong></p>
+                    
+                    <div class="nutrition-tip">
+                        <p><strong>BMR (Basal Metabolic Rate):</strong></p>
+                        <div>• Kalori yang tubuh bakar saat istirahat total (tidur)</div>
+                        <div>• Untuk fungsi dasar: bernapas, sirkulasi darah, sel regenerasi</div>
+                        <div>• Sekitar 60-70% total pengeluaran kalori harian</div>
+                    </div>
+                    
+                    <div class="food-recommendation mt-3">
+                        <p><strong>TDEE (Total Daily Energy Expenditure):</strong></p>
+                        <div>• Total kalori yang tubuh bakar dalam sehari</div>
+                        <div>• Termasuk BMR + aktivitas fisik + pencernaan makanan</div>
+                        <div>• Angka ini menentukan kebutuhan kalori harian Anda</div>
+                    </div>
+                    
+                    <p class="mt-3"><strong>Contoh:</strong></p>
+                    <div>BMR Anda: 1600 kkal</div>
+                    <div>Aktivitas fisik: 400 kkal</div>
+                    <div>Pencernaan: 100 kkal</div>
+                    <div><strong>TDEE: 2100 kkal</strong></div>
+                `;
+            }
+            
+            // Default welcome response
+            return `
+                <p>Saya bisa membantu Anda memulai perjalanan nutrisi yang sehat dengan:</p>
+                
+                <div class="d-flex flex-wrap gap-2 mt-3">
+                    <button class="quick-reply-btn" onclick="sendWelcomeQuickReply('Bagaimana cara menghitung kebutuhan kalori?')">
+                        🧮 Hitung Kebutuhan Kalori
+                    </button>
+                    <button class="quick-reply-btn" onclick="sendWelcomeQuickReply('Tips diet sehat untuk pemula')">
+                        💡 Tips Diet Pemula
+                    </button>
+                    <button class="quick-reply-btn" onclick="showImageUploadModal()">
+                        📸 Analisis Foto Makanan
+                    </button>
+                    <button class="quick-reply-btn" onclick="sendWelcomeQuickReply('Apa itu BMR dan TDEE?')">
+                        📊 Penjelasan BMR & TDEE
+                    </button>
+                </div>
+                
+                <p class="mt-3">Atau tanyakan langsung tentang nutrisi, diet, dan gaya hidup sehat!</p>
             `;
         }
 
