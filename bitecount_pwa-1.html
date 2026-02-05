@@ -511,62 +511,265 @@
     </div>
 
     <script>
-        // Database Kalori Makanan (per 100 gram)
+        // Database Kalori Makanan Internasional (per 100 gram)
         const foodDatabase = {
+            // ===== INDONESIA =====
             // Nasi & Karbohidrat
-            'nasi putih': 130,
-            'nasi merah': 111,
-            'nasi goreng': 185,
-            'mie instan': 371,
-            'mie goreng': 189,
-            'kentang': 77,
-            'kentang goreng': 312,
-            'roti tawar': 265,
-            'roti gandum': 247,
+            'nasi putih': 130, 'nasi': 130, 'rice': 130,
+            'nasi merah': 111, 'brown rice': 111,
+            'nasi goreng': 185, 'fried rice': 185,
+            'nasi uduk': 178, 'nasi kuning': 160,
+            'nasi liwet': 140, 'nasi pecel': 175,
+            'lontong': 120, 'ketupat': 120,
+            'mie instan': 371, 'mie goreng': 189, 'noodles': 138,
+            'mie ayam': 145, 'mie bakso': 150,
+            'kwetiau': 109, 'bihun': 109,
+            'kentang': 77, 'potato': 77,
+            'kentang goreng': 312, 'french fries': 312,
+            'roti tawar': 265, 'bread': 265, 'white bread': 265,
+            'roti gandum': 247, 'whole wheat bread': 247,
+            'singkong': 160, 'cassava': 160,
+            'ubi': 86, 'sweet potato': 86,
+            'jagung': 86, 'corn': 86,
             
-            // Protein
-            'ayam': 165,
-            'ayam goreng': 246,
-            'telur': 155,
-            'telur rebus': 155,
-            'ikan': 206,
-            'daging sapi': 250,
-            'tempe': 193,
-            'tahu': 76,
+            // Protein Indonesia
+            'ayam': 165, 'chicken': 165,
+            'ayam goreng': 246, 'fried chicken': 246,
+            'ayam bakar': 165, 'grilled chicken': 165,
+            'ayam geprek': 220, 'ayam penyet': 220,
+            'rendang': 250, 'rendang daging': 250,
+            'sate ayam': 180, 'chicken satay': 180,
+            'sate kambing': 200, 'lamb satay': 200,
+            'gulai': 165, 'gulai ayam': 165,
+            'opor ayam': 180,
+            'telur': 155, 'egg': 155,
+            'telur rebus': 155, 'boiled egg': 155,
+            'telur dadar': 154, 'omelette': 154,
+            'telur ceplok': 196, 'fried egg': 196,
+            'ikan': 206, 'fish': 206,
+            'ikan goreng': 195, 'fried fish': 195,
+            'ikan bakar': 150, 'grilled fish': 150,
+            'pepes ikan': 120,
+            'daging sapi': 250, 'beef': 250,
+            'daging kambing': 206, 'lamb': 206,
+            'bakso': 112, 'meatball': 112,
+            'tempe': 193, 'tempeh': 193,
+            'tempe goreng': 225,
+            'tempe bacem': 180,
+            'tahu': 76, 'tofu': 76,
+            'tahu goreng': 190,
+            'tahu bacem': 120,
             
-            // Sayuran
-            'kangkung': 19,
+            // Sayuran Indonesia
+            'kangkung': 19, 'water spinach': 19,
             'tumis kangkung': 35,
-            'bayam': 23,
-            'brokoli': 34,
-            'wortel': 41,
-            'tomat': 18,
-            'timun': 15,
-            'kol': 25,
+            'bayam': 23, 'spinach': 23,
+            'brokoli': 34, 'broccoli': 34,
+            'wortel': 41, 'carrot': 41,
+            'tomat': 18, 'tomato': 18,
+            'timun': 15, 'cucumber': 15,
+            'kol': 25, 'cabbage': 25,
+            'terong': 25, 'eggplant': 25,
+            'buncis': 31, 'green beans': 31,
+            'kacang panjang': 26, 'long beans': 26,
+            'labu': 26, 'pumpkin': 26,
+            'tauge': 30, 'bean sprouts': 30,
+            'pare': 17, 'bitter gourd': 17,
             
-            // Buah
-            'apel': 52,
-            'pisang': 89,
-            'jeruk': 47,
-            'mangga': 60,
-            'semangka': 30,
-            'anggur': 69,
-            'pepaya': 43,
+            // Makanan Tradisional Indonesia
+            'gado-gado': 150, 'pecel': 180,
+            'ketoprak': 160, 'rujak': 65,
+            'soto ayam': 90, 'soto': 90,
+            'sop': 60, 'soup': 60,
+            'rawon': 120, 'gudeg': 140,
+            'pempek': 160, 'siomay': 125,
+            'martabak': 340, 'martabak manis': 390,
+            'bakwan': 180, 'gorengan': 200,
+            'risoles': 240, 'pastel': 230,
+            'lemper': 190, 'onde-onde': 250,
             
-            // Snack
-            'chitato': 530,
-            'cheetos': 570,
-            'keripik': 530,
-            'coklat': 546,
-            'biskuit': 480,
-            'kue': 389,
+            // ===== BUAH =====
+            'apel': 52, 'apple': 52,
+            'pisang': 89, 'banana': 89,
+            'jeruk': 47, 'orange': 47,
+            'mangga': 60, 'mango': 60,
+            'semangka': 30, 'watermelon': 30,
+            'melon': 34, 'cantaloupe': 34,
+            'anggur': 69, 'grapes': 69,
+            'pepaya': 43, 'papaya': 43,
+            'nanas': 50, 'pineapple': 50,
+            'jambu': 38, 'guava': 38,
+            'strawberry': 32, 'stroberi': 32,
+            'blueberry': 57, 'blackberry': 43,
+            'raspberry': 52, 'kiwi': 61,
+            'pear': 57, 'pir': 57,
+            'peach': 39, 'persik': 39,
+            'plum': 46, 'cherry': 50,
+            'avocado': 160, 'alpukat': 160,
+            'durian': 147, 'rambutan': 68,
+            'manggis': 73, 'mangosteen': 73,
+            'salak': 82, 'snake fruit': 82,
             
-            // Minuman
-            'susu': 61,
-            'teh manis': 35,
-            'kopi': 2,
-            'jus jeruk': 45,
-            'soda': 41,
+            // ===== AMERIKA & FAST FOOD =====
+            'burger': 295, 'hamburger': 295,
+            'cheeseburger': 303,
+            'pizza': 266, 'pepperoni pizza': 298,
+            'hot dog': 290, 'hotdog': 290,
+            'sandwich': 230, 'sandwhich': 230,
+            'kebab': 200, 'shawarma': 200,
+            'taco': 226, 'burrito': 206,
+            'nachos': 300, 'quesadilla': 206,
+            'chicken wings': 290, 'wings': 290,
+            'chicken nuggets': 296, 'nugget': 296,
+            'onion rings': 407,
+            'fish and chips': 265,
+            'steak': 271, 'bbq ribs': 290,
+            'mac and cheese': 164,
+            'spaghetti': 158, 'pasta': 131,
+            'lasagna': 135, 'fettuccine': 131,
+            
+            // ===== JEPANG =====
+            'sushi': 127, 'sashimi': 127,
+            'ramen': 436, 'udon': 95,
+            'soba': 99, 'tempura': 175,
+            'teriyaki': 165, 'yakitori': 180,
+            'takoyaki': 112, 'okonomiyaki': 150,
+            'gyoza': 220, 'edamame': 122,
+            'miso soup': 40, 'miso': 40,
+            'tonkatsu': 265, 'katsu': 265,
+            'onigiri': 180, 'nori': 35,
+            'wasabi': 109, 'soy sauce': 53,
+            'sake': 134,
+            
+            // ===== KOREA =====
+            'kimchi': 15, 'kimchi jjigae': 50,
+            'bibimbap': 120, 'bulgogi': 190,
+            'samgyeopsal': 331, 'korean bbq': 250,
+            'tteokbokki': 145, 'japchae': 132,
+            'jjajangmyeon': 130, 'ramyeon': 436,
+            'kimbap': 150, 'gimbap': 150,
+            'korean fried chicken': 250,
+            'sundubu jjigae': 80,
+            'galbi': 300, 'bossam': 200,
+            
+            // ===== THAILAND =====
+            'pad thai': 180, 'tom yum': 60,
+            'green curry': 150, 'red curry': 175,
+            'som tam': 85, 'papaya salad': 85,
+            'thai fried rice': 185,
+            'pad see ew': 150,
+            'massaman curry': 165,
+            'spring roll': 140,
+            'thai tea': 154, 'thai milk tea': 154,
+            
+            // ===== CHINA =====
+            'dim sum': 180, 'dumpling': 200,
+            'wonton': 175, 'baozi': 120,
+            'peking duck': 337, 'sweet and sour': 150,
+            'fried rice chinese': 185,
+            'chow mein': 137, 'lo mein': 155,
+            'kung pao chicken': 180,
+            'mapo tofu': 135,
+            'char siu': 195,
+            
+            // ===== INDIA =====
+            'curry': 165, 'chicken curry': 180,
+            'biryani': 165, 'naan': 262,
+            'tandoori': 150, 'samosa': 262,
+            'masala': 180, 'tikka masala': 180,
+            'dosa': 168, 'idli': 58,
+            'roti': 297, 'chapati': 120,
+            'dal': 116, 'paneer': 265,
+            
+            // ===== ITALIA =====
+            'carbonara': 195, 'bolognese': 135,
+            'pesto': 161, 'alfredo': 220,
+            'risotto': 130, 'gnocchi': 131,
+            'bruschetta': 140,
+            'tiramisu': 240, 'gelato': 207,
+            'focaccia': 271, 'ciabatta': 260,
+            
+            // ===== MIDDLE EAST =====
+            'hummus': 166, 'falafel': 333,
+            'pita': 275, 'tabbouleh': 36,
+            'baba ganoush': 70,
+            'couscous': 112,
+            
+            // ===== SNACK INTERNASIONAL =====
+            'chitato': 530, 'lays': 536,
+            'cheetos': 570, 'doritos': 498,
+            'pringles': 536, 'keripik': 530,
+            'chips': 536, 'potato chips': 536,
+            'popcorn': 375, 'pretz': 380,
+            'crackers': 502, 'biskuit': 480,
+            'wafer': 518, 'kue': 389,
+            'cookies': 502, 'oreo': 478,
+            'brownies': 466, 'cake': 389,
+            'donut': 452, 'muffin': 377,
+            'coklat': 546, 'chocolate': 546,
+            'dark chocolate': 598,
+            'milk chocolate': 535,
+            'candy': 394, 'permen': 394,
+            'ice cream': 207, 'es krim': 207,
+            
+            // ===== MINUMAN =====
+            'susu': 61, 'milk': 61,
+            'susu coklat': 83, 'chocolate milk': 83,
+            'teh': 1, 'tea': 1,
+            'teh manis': 35, 'sweet tea': 35,
+            'kopi': 2, 'coffee': 2,
+            'kopi susu': 38, 'latte': 132,
+            'cappuccino': 74, 'espresso': 9,
+            'americano': 3, 'mocha': 175,
+            'jus jeruk': 45, 'orange juice': 45,
+            'jus apel': 46, 'apple juice': 46,
+            'jus': 45, 'juice': 45,
+            'smoothie': 60,
+            'soda': 41, 'cola': 41,
+            'sprite': 38, 'fanta': 42,
+            'air mineral': 0, 'water': 0,
+            'air kelapa': 19, 'coconut water': 19,
+            'boba': 120, 'bubble tea': 120,
+            'milkshake': 112,
+            'energy drink': 45,
+            'beer': 43, 'wine': 83,
+            
+            // ===== CEMILAN INDONESIA =====
+            'kerupuk': 510, 'crackers udang': 510,
+            'emping': 535, 'rempeyek': 490,
+            'kacang': 567, 'nuts': 567,
+            'kacang tanah': 567, 'peanuts': 567,
+            'kacang mete': 553, 'cashew': 553,
+            'kacang almond': 579, 'almond': 579,
+            'kacang walnut': 654, 'walnut': 654,
+            'kue kering': 480, 'nastar': 480,
+            'kastengel': 520, 'putri salju': 490,
+            
+            // ===== SARAPAN =====
+            'pancake': 227, 'waffle': 291,
+            'oatmeal': 68, 'oat': 389,
+            'cereal': 379, 'sereal': 379,
+            'corn flakes': 357,
+            'granola': 471, 'muesli': 350,
+            'yogurt': 59, 'greek yogurt': 97,
+            'croissant': 406, 'bagel': 257,
+            
+            // ===== LAINNYA =====
+            'mentega': 717, 'butter': 717,
+            'margarin': 719, 'margarine': 719,
+            'mayonnaise': 680, 'mayo': 680,
+            'keju': 402, 'cheese': 402,
+            'cream cheese': 342,
+            'sour cream': 193,
+            'ketchup': 101, 'saus tomat': 101,
+            'saus sambal': 40, 'hot sauce': 40,
+            'mustard': 66, 'bbq sauce': 172,
+            'honey': 304, 'madu': 304,
+            'jam': 278, 'selai': 278,
+            'selai kacang': 588, 'peanut butter': 588,
+            'nutella': 539,
+            'gula': 387, 'sugar': 387,
+            'garam': 0, 'salt': 0,
         };
         
         // Meal Plans Database
@@ -819,34 +1022,73 @@
             calculateCalories(message);
         }
         
-        function calculateCalories(message) {
+        function getSuggestions(input) {
+            const lowerInput = input.toLowerCase();
+            const suggestions = [];
+            
+            // Find similar foods
+            for (const food of Object.keys(foodDatabase)) {
+                if (food.includes(lowerInput.slice(0, 3)) || lowerInput.includes(food.slice(0, 3))) {
+                    suggestions.push(food);
+                    if (suggestions.length >= 3) break;
+                }
+            }
+            
+            return suggestions;
+        }
+        
+                function calculateCalories(message) {
             let totalCalories = 0;
             let foundFood = null;
             let amount = 100; // default
+            let unit = 'gram';
             
             // Extract amount from message
-            const amountMatch = message.match(/(\d+)\s*(gr|gram|g|lembar|buah|porsi)?/i);
+            const amountMatch = message.match(/(\d+)\s*(gr|gram|g|ml|lembar|buah|porsi|pcs|potong|slice|cup|gelas)?/i);
             if (amountMatch) {
                 amount = parseInt(amountMatch[1]);
+                if (amountMatch[2]) {
+                    unit = amountMatch[2].toLowerCase();
+                    // Convert units to grams if needed
+                    if (unit === 'lembar' || unit === 'slice') amount = amount * 30; // 1 lembar ~30g
+                    if (unit === 'buah' || unit === 'pcs') amount = amount * 150; // 1 buah ~150g
+                    if (unit === 'porsi') amount = amount * 200; // 1 porsi ~200g
+                    if (unit === 'potong') amount = amount * 50; // 1 potong ~50g
+                    if (unit === 'cup' || unit === 'gelas') amount = amount * 240; // 1 cup ~240ml/g
+                }
             }
             
-            // Search for food in database
+            // Search for food in database - find longest match first
+            const lowerMessage = message.toLowerCase();
+            let bestMatch = '';
+            let bestMatchLength = 0;
+            
             for (const [food, caloriesPer100g] of Object.entries(foodDatabase)) {
-                if (message.toLowerCase().includes(food)) {
-                    foundFood = food;
+                if (lowerMessage.includes(food) && food.length > bestMatchLength) {
+                    bestMatch = food;
+                    bestMatchLength = food.length;
                     totalCalories = (caloriesPer100g * amount) / 100;
-                    break;
+                    foundFood = food;
                 }
             }
             
             if (foundFood) {
+                const displayAmount = unit === 'gram' || unit === 'g' || unit === 'gr' || unit === 'ml' ? amount : amountMatch ? parseInt(amountMatch[1]) : 1;
+                const displayUnit = unit === 'gram' || unit === 'g' || unit === 'gr' ? 'gram' : 
+                                   unit === 'ml' ? 'ml' :
+                                   unit === 'lembar' || unit === 'slice' ? 'lembar' :
+                                   unit === 'buah' || unit === 'pcs' ? 'buah' :
+                                   unit === 'porsi' ? 'porsi' :
+                                   unit === 'potong' ? 'potong' :
+                                   unit === 'cup' || unit === 'gelas' ? 'gelas' : 'gram';
+                
                 const response = `
                     <div>
                         <p>Oke! Saya sudah hitung kalori untuk kamu 🎯</p>
                         <div class="calorie-card">
                             <div class="calorie-label">📊 Total Kalori</div>
                             <div class="calorie-value">${Math.round(totalCalories)} kkal</div>
-                            <div class="calorie-label">${foundFood.charAt(0).toUpperCase() + foundFood.slice(1)} (${amount} gram)</div>
+                            <div class="calorie-label">${foundFood.charAt(0).toUpperCase() + foundFood.slice(1)} (${displayAmount} ${displayUnit})</div>
                         </div>
                         <p style="margin-top: 10px; font-size: 0.9rem;">
                             💡 <strong>Tips:</strong> ${getHealthTip(totalCalories)}
@@ -855,7 +1097,10 @@
                 `;
                 addMessage(response, 'bot');
             } else {
-                addMessage(`Hmm, saya belum punya data untuk "${message}" 😅. Coba ketik makanan lain seperti: nasi putih, ayam goreng, tempe, atau chitato!`, 'bot');
+                const suggestions = getSuggestions(message);
+                const suggestionText = suggestions.length > 0 ? 
+                    `<br><br>Mungkin maksud kamu: <strong>${suggestions.join(', ')}</strong>?` : '';
+                addMessage(`Hmm, saya belum punya data untuk "${message}" 😅. Coba ketik makanan seperti: nasi putih, pizza, sushi, burger, atau dim sum!${suggestionText}`, 'bot');
             }
         }
         
